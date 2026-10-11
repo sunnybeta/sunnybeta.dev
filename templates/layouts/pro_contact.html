@@ -1,0 +1,59 @@
+{{ define "pro_contact" }}<!doctype html>
+<html lang="en">
+<head>
+{{ template "pro_head" . }}
+</head>
+<body>
+
+{{ template "pro_header" . }}
+
+<main class="contact-page wrap">
+
+  <div class="contact-grid">
+
+    <a class="contact-box" href="mailto:{{ .Site.Person.Email }}">
+      <span class="contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/>
+          <path d="M3 6.5l9 6.5 9-6.5"/>
+        </svg>
+      </span>
+      <h1>Contact Me</h1>
+      <span class="contact-sub">Email</span>
+      <span class="contact-value">{{ .Site.Person.Email }}</span>
+    </a>
+
+    <div class="contact-box">
+      <span class="contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2.5l7.5 3v6c0 4.6-3.1 8.6-7.5 10-4.4-1.4-7.5-5.4-7.5-10v-6z"/>
+          <path d="M9.2 12.2l2 2 3.6-3.8"/>
+        </svg>
+      </span>
+      <h2>PGP Key</h2>
+      <span class="contact-sub">Download my public PGP key for encrypted communication using email.</span>
+
+      <a class="btn" href="/pgp-key.asc" download>Download key (.asc)</a>
+
+      <span class="fingerprint">
+        Fingerprint:<br>
+        <!-- TODO: replace with your real fingerprint -->
+        XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+      </span>
+    </div>
+
+  </div>
+
+  <div class="copy-bar">
+    <button class="btn" data-copy="{{ .Site.Person.Email }}">Copy email</button>
+    <span class="copy-state" role="status" aria-live="polite"></span>
+  </div>
+
+</main>
+
+{{ template "pro_footer" . }}
+
+<script src="/static/js/copy.js"></script>
+</body>
+</html>
+{{ end }}

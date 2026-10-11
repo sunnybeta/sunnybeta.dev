@@ -1,0 +1,35 @@
+{{ define "pro_blogs" }}<!doctype html>
+<html lang="en">
+<head>
+{{ template "pro_head" . }}
+</head>
+<body>
+
+{{ template "pro_header" . }}
+
+<main>
+  <section class="hero wrap">
+    <span class="eyebrow">Blogs</span>
+    <h1>Notes and <span class="accent">write-ups.</span></h1>
+    <p class="lead">Placeholder list &mdash; add your real posts in main.go. Full articles are not part of this build yet.</p>
+  </section>
+
+  <section class="section wrap">
+    <div class="post-list">
+      {{ range .Site.Posts }}
+        <article class="card post">
+          <span class="stamp">{{ .Date }}</span>
+          <h3><a class="card-link" href="{{ .URL }}">{{ .Title }}</a></h3>
+          <p>{{ .Summary }}</p>
+          <div class="tags">{{ range .Tags }}<span class="tag">{{ . }}</span>{{ end }}</div>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+</main>
+
+{{ template "pro_footer" . }}
+
+</body>
+</html>
+{{ end }}

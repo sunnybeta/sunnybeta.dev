@@ -1,0 +1,113 @@
+{{ define "pro_index" }}<!doctype html>
+<html lang="en">
+<head>
+{{ template "pro_head" . }}
+</head>
+<body>
+
+{{ template "pro_header" . }}
+
+<main>
+  <section class="hero wrap">
+    <span class="eyebrow">{{ .Site.Person.Availability }}</span>
+    <h1>{{ .Site.Person.Name }}</h1>
+    <p class="lead">{{ .Site.Person.Headline }}</p>
+    <p class="muted">{{ .Site.Person.Role }} &middot; {{ .Site.Person.Location }}</p>
+    <div class="actions">
+      <a class="btn primary" href="/contact">Start a project</a>
+      <a class="btn" href="/projects">See the work</a>
+    </div>
+
+    <dl class="facts">
+      {{ range .Site.Facts }}
+        <div class="fact"><dd>{{ .Value }}</dd><dt>{{ .Label }}</dt></div>
+      {{ end }}
+    </dl>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head">
+      <h2>What I do</h2>
+      <p class="lead">One person from scoping to launch &mdash; no handoffs.</p>
+    </div>
+    <div class="grid three">
+      {{ range .Site.Services }}
+        <article class="card">
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Body }}</p>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head">
+      <h2>Featured work</h2>
+      <p class="lead">A few things I have shipped recently.</p>
+    </div>
+    <div class="grid three">
+      {{ range .Site.Projects }}
+        {{ if .Featured }}
+          <article class="card project">
+            <div class="project-thumb" aria-hidden="true"></div>
+            <h3>{{ .Name }}</h3>
+            <p>{{ .Summary }}</p>
+            <div class="tags">{{ range .Tags }}<span class="tag">{{ . }}</span>{{ end }}</div>
+            <div class="meta"><span>{{ .Kind }}</span><span>{{ .Year }}</span></div>
+          </article>
+        {{ end }}
+      {{ end }}
+    </div>
+    <div class="actions"><a class="btn" href="/projects">All projects</a></div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head">
+      <h2>What clients say</h2>
+    </div>
+    <div class="grid three">
+      {{ range $i, $t := .Site.Testimonials }}
+        {{ if lt $i 3 }}
+          <blockquote class="card quote">
+            <p>{{ $t.Quote }}</p>
+            <footer class="quote-by">{{ $t.Name }}{{ if $t.Company }} &mdash; {{ $t.Company }}{{ end }}</footer>
+          </blockquote>
+        {{ end }}
+      {{ end }}
+    </div>
+    <div class="actions"><a class="btn" href="/testimonials">More testimonials</a></div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head">
+      <h2>Latest writing</h2>
+    </div>
+    <div class="grid three">
+      {{ range $i, $p := .Site.Posts }}
+        {{ if lt $i 3 }}
+          <article class="card">
+            <span class="stamp">{{ .Date }}</span>
+            <h3><a class="card-link" href="{{ .URL }}">{{ .Title }}</a></h3>
+            <p>{{ .Summary }}</p>
+          </article>
+        {{ end }}
+      {{ end }}
+    </div>
+    <div class="actions"><a class="btn" href="/blogs">All posts</a></div>
+  </section>
+
+  <section class="section wrap cta">
+    <h2>Have a project in mind?</h2>
+    <p class="lead">Tell me what you are building and I will tell you honestly whether I am the right fit.</p>
+    <div class="actions">
+      <a class="btn primary" href="/contact">Get in touch</a>
+      <a class="btn" href="/pricing">See pricing</a>
+    </div>
+  </section>
+</main>
+
+{{ template "pro_footer" . }}
+
+</body>
+</html>
+{{ end }}

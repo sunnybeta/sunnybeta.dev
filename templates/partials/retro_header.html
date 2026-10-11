@@ -1,0 +1,63 @@
+{{ define "retro_header" }}
+<div class="scanlines" aria-hidden="true"></div>
+
+<div class="retro-topbar">
+    <a class="pro-btn" href="/pro">Visit the professional site &rarr;</a>
+    <span class="retro-tag">~ {{ .Site.Person.Handle }} ~</span>
+    <span class="retro-counter" data-visitor-counter>
+      VISITOR #<span data-visitor-id>0000000</span>
+    </span>
+  </div>
+
+  <div class="marquee" role="marquee">
+    <div class="marquee-track">
+      {{ range .Site.Retro.Badges }}
+        <span class="marquee-item">{{ . }} &#9679;</span>
+      {{ end }}
+      {{ range .Site.Retro.Badges }}
+        <span class="marquee-item">{{ . }} &#9679;</span>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="marquee marquee-reverse">
+    <div class="marquee-track ticker">
+      {{ range .Site.Retro.Ticker }}
+        <span class="marquee-item">{{ . }} &#9656;</span>
+      {{ end }}
+      {{ range .Site.Retro.Ticker }}
+        <span class="marquee-item">{{ . }} &#9656;</span>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="retro-masthead">
+    <h1 class="retro-logo">
+      <span class="blink">_</span>{{ .Site.Person.Name }}<span class="blink">_</span>
+    </h1>
+    <span class="art-star" aria-hidden="true"><svg class="art"><use href="#tile-sparkle"/></svg></span>
+    <p class="retro-subtitle">{{ .Site.Person.Role }} // {{ .Site.Person.Location }}</p>
+  </div>
+
+  <div class="wordart-wrap">
+    <span class="wa wa-rainbow" data-random="wordart">WELCOME TO MY SITE</span>
+  </div>
+
+  <nav class="retro-nav" aria-label="Sections">
+    {{ range .Site.RetroNav }}
+      <a href="{{ .Path }}">{{ .Label }}</a>
+    {{ end }}
+  </nav>
+
+  <div class="retro-navmeta">
+    <span class="meta-field"><b>LAST UPDATED:</b> <span data-random="lastupdated">&mdash;</span></span>
+    <span class="meta-field"><b>ONLINE NOW:</b> <span data-random="onlinenow">&mdash;</span></span>
+    <span class="meta-field"><b>CURRENT QUEST:</b> <span data-random="quest">&mdash;</span></span>
+    <span class="meta-field"><b>BUILT WITH:</b> <span data-random="builtwith">&mdash;</span></span>
+    <span class="meta-field"><b>TODAY'S FORTUNE:</b> <span data-random="fortune">&mdash;</span></span>
+    <span class="meta-field"><b>RANDOM LINK:</b>
+      <a class="retro-link" data-random-link href="#" rel="noopener">&mdash;</a>
+    </span>
+    <button class="navmeta-btn" type="button" data-reroll-all>[ re-roll all ]</button>
+  </div>
+{{ end }}

@@ -1,0 +1,14 @@
+{{ define "retro_footer" }}
+  <div class="retro-badges">
+    {{ range .Site.Retro.Badges }}
+      <span class="badge-88">{{ . }}</span>
+    {{ end }}
+  </div>
+
+  <div class="retro-colophon">
+    <p>&copy; {{ .Site.Year }} {{ .Site.Person.Name }} | Made in {{ .Site.Person.Location }}</p>
+    <p>Built with <span class="heart-88">&#9829;</span> and a text editor that predates me.</p>
+    <p>Look at some of my projects on
+      <a class="retro-link" href="{{ .Site.Person.GithubURL }}" target="_blank" rel="noopener">GitHub</a>.</p>
+  </div>
+{{ end }}

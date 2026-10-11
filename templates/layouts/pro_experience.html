@@ -1,0 +1,57 @@
+{{ define "pro_experience" }}<!doctype html>
+<html lang="en">
+<head>
+{{ template "pro_head" . }}
+</head>
+<body>
+
+{{ template "pro_header" . }}
+
+<main>
+  <section class="hero wrap">
+    <span class="eyebrow">Experience</span>
+    <h1>Where I have <span class="accent">been useful.</span></h1>
+    <p class="lead">Placeholder entries &mdash; replace the roles and summaries in main.go with your real history.</p>
+
+    <dl class="facts">
+      {{ range .Site.Facts }}
+        <div class="fact"><dd>{{ .Value }}</dd><dt>{{ .Label }}</dt></div>
+      {{ end }}
+    </dl>
+  </section>
+
+  <section class="section wrap">
+    <div class="timeline">
+      {{ range .Site.Roles }}
+        <article class="card timeline-item">
+          <div class="timeline-when"><b>{{ .Period }}</b></div>
+          <div class="timeline-body">
+            <h3>{{ .Title }} <span class="muted">&mdash; {{ .Org }}</span></h3>
+            <p>{{ .Summary }}</p>
+            <div class="tags">{{ range .Tags }}<span class="tag">{{ . }}</span>{{ end }}</div>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head"><h2>Toolkit</h2></div>
+    <div class="grid two">
+      {{ range .Site.Skills }}
+        <article class="card">
+          <h3>{{ .Name }}</h3>
+          <div class="tags">
+            {{ range .Items }}<span class="tag">{{ . }}</span>{{ end }}
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+</main>
+
+{{ template "pro_footer" . }}
+
+</body>
+</html>
+{{ end }}

@@ -1,0 +1,283 @@
+{{ define "retro" }}<!doctype html>
+<html lang="en">
+<head>
+{{ template "retro_head" . }}
+</head>
+<body>
+{{ template "retro_sprite" . }}
+
+<div id="retro-data"
+     data-status="{{ join .Site.Retro.Status " | " }}"
+     data-listening="{{ join .Site.Retro.Listening " | " }}"
+     data-mood="{{ join .Site.Retro.Mood " | " }}"
+     data-lastupdated="{{ join .Site.Retro.LastUpdated " | " }}"
+     data-quest="{{ join .Site.Retro.Quest " | " }}"
+     data-builtwith="{{ join .Site.Retro.BuiltWith " | " }}"
+     data-fortune="{{ join .Site.Retro.Fortune " | " }}"
+     data-wordart="{{ join .Site.Retro.WordArt " | " }}"
+     data-captions="{{ join .Site.Retro.Captions " | " }}"
+     data-awards="{{ join .Site.Retro.Awards " | " }}"
+     data-stickers="{{ join .Site.Retro.Stickers " | " }}"
+     data-webring="{{ join .Site.Retro.Webring " | " }}"
+     hidden></div>
+
+<div class="retro-frame">
+
+{{ template "retro_header" . }}
+
+<main class="retro-main">
+
+  <section id="about" class="retro-section">
+    <h2><span class="hash">##</span> ABOUT.ME</h2>
+    <p class="retro-lead">{{ .Site.Person.Headline }}</p>
+    <p>{{ .Site.Person.Intro }}</p>
+
+    <div class="about-split">
+      <div class="about-portrait">
+        <div class="random-img-slot" data-random-image>
+          <svg class="art art-lg" data-random-art aria-hidden="true"><use href="#tile-cat"/></svg>
+        </div>
+        <p class="random-caption" data-random-caption>portrait pending</p>
+      </div>
+
+      <div class="about-facts">
+        <div class="retro-facts">
+          {{ range .Site.Facts }}
+            <div class="fact"><span class="fact-value">{{ .Value }}</span><span class="fact-label">{{ .Label }}</span></div>
+          {{ end }}
+        </div>
+        <p class="muted">THIS PAGE IS BEST EXPERIENCED WITH THE VOLUME UP AND A CUP OF TEA.</p>
+      </div>
+    </div>
+
+    <h3>WHAT I WORK WITH</h3>
+    <div class="retro-grid-2">
+      {{ range .Site.Services }}
+        <div class="panel">
+          <div class="panel-bar">[{{ .Icon }}] {{ .Tag }}</div>
+          <p class="panel-title">{{ .Title }}</p>
+          <p>{{ .Body }}</p>
+        </div>
+      {{ end }}
+    </div>
+
+    {{ range .Site.Skills }}
+      <p class="skill-line"><span class="k">{{ .Name }}:</span> {{ range $i, $s := .Items }}{{ if $i }}, {{ end }}{{ $s }}{{ end }}</p>
+    {{ end }}
+
+    <div class="divider" aria-hidden="true"><svg class="art"><use href="#tile-sparkle"/></svg><svg class="art"><use href="#tile-flame"/></svg><svg class="art"><use href="#tile-sparkle"/></svg></div>
+  </section>
+
+  <section class="retro-widgets">
+    <div class="widget widget-status">
+      <div class="widget-bar">STATUS.TXT</div>
+      <div class="widget-body">
+        <p><span class="k">STATUS:</span> <span data-status-line>loading...</span></p>
+        <p><span class="k">LISTENING:</span> <span data-listening-line>&mdash;</span></p>
+        <p><span class="k">MOOD:</span> <span data-mood-line>&mdash;</span></p>
+        <p><span class="k">BUILD:</span> {{ .Site.Retro.Build }}</p>
+      </div>
+      <button class="widget-btn" type="button" data-refresh-status>[ re-roll ]</button>
+    </div>
+
+    <div class="widget widget-dice">
+      <div class="widget-bar">DICE.CARD</div>
+      <div class="widget-body center">
+        <div class="dice-row">
+          <div class="dice" data-dice="d6" aria-label="six sided dice"><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
+          <div class="dice dice-d20" data-dice="d20" aria-label="twenty sided dice"><span class="d20-face"><b data-dice-value>20</b></span></div>
+        </div>
+        <p class="dice-result">YOU ROLLED <b data-dice-total>1</b></p>
+        <p class="dice-quest" data-random="quest">&mdash;</p>
+      </div>
+      <button class="widget-btn" type="button" data-roll-dice>[ roll again ]</button>
+    </div>
+
+    <div class="widget widget-visitor">
+      <div class="widget-bar">VISITORS.SYS</div>
+      <div class="widget-body center">
+        <p class="visitor-label">YOU ARE VISITOR NUMBER</p>
+        <p class="odometer" data-visitor-counter>
+          <span data-visitor-id>0000000</span>
+        </p>
+        <p class="visitor-note">THIS COUNTER IS PURELY COSMETIC<br>IT IS ALSO LYING A LITTLE</p>
+      </div>
+      <div class="widget-bar alt">MAILBOX</div>
+      <div class="widget-body">
+        <p><span class="k">EMAIL:</span>
+          <a class="retro-link" href="mailto:{{ .Site.Person.Email }}">{{ .Site.Person.Email }}</a>
+        </p>
+        <p><span class="k">PGP:</span> key available &mdash; <a class="retro-link" href="#contact">see below</a></p>
+      </div>
+    </div>
+
+    <div class="widget widget-now">
+      <div class="widget-bar">NOW.PLAYING</div>
+      <div class="widget-body center">
+        <div class="random-img-slot small" data-random-image>
+          <svg class="art art-lg" data-random-art aria-hidden="true"><use href="#tile-disc"/></svg>
+        </div>
+        <p class="random-caption" data-random-caption>loading...</p>
+      </div>
+      <button class="widget-btn" type="button" data-reroll-image>[ next ]</button>
+    </div>
+  </section>
+
+  <section id="experience" class="retro-section">
+    <h2><span class="hash">##</span> EXPERIENCE.LOG</h2>
+    {{ range $i, $r := .Site.Roles }}
+      <div class="panel">
+        <div class="panel-bar">LOG[{{ $i }}] :: {{ $r.Period }}</div>
+        <p class="panel-title">{{ $r.Title }} @ {{ $r.Org }}</p>
+        <p>{{ $r.Summary }}</p>
+        <p class="tags">{{ range $r.Tags }}<span class="tag">{{ . }}</span>{{ end }}</p>
+      </div>
+    {{ end }}
+  </section>
+
+  <section id="projects" class="retro-section">
+    <h2><span class="hash">##</span> PROJECTS.DIR</h2>
+    <div class="retro-grid-2">
+      {{ range .Site.Projects }}
+        <div class="panel">
+          <div class="panel-bar">{{ .Year }} :: {{ .Kind }}</div>
+          <div class="panel-thumb" aria-hidden="true"><svg class="art art-lg" data-panel-art><use href="#tile-crt"/></svg></div>
+          <p class="panel-title">{{ .Name }}</p>
+          <p>{{ .Summary }}</p>
+          <p class="tags">{{ range .Tags }}<span class="tag">{{ . }}</span>{{ end }}</p>
+        </div>
+      {{ end }}
+    </div>
+    <p class="more-link">&gt;&gt; <a class="retro-link" href="/projects">MORE PROJECTS</a></p>
+  </section>
+
+  <section id="pricing" class="retro-section">
+    <h2><span class="hash">##</span> PRICES.TXT</h2>
+    <p class="retro-lead">FIXED PRICE. AGREED BEFORE WORK STARTS. NO SURPRISES.</p>
+
+    <div class="retro-grid-2">
+      {{ range .Site.Tiers }}
+        <div class="panel{{ if .Popular }} panel-hot{{ end }}">
+          {{ if .Popular }}<div class="hot-flag">POPULAR</div>{{ end }}
+          <div class="panel-bar">{{ .Tag }}</div>
+          <p class="panel-title">{{ .Name }}</p>
+          <p class="price-big">{{ .Price }}<span class="price-period"> {{ .Period }}</span></p>
+          <p>{{ .Summary }}</p>
+          <ul class="retro-list">
+            {{ range .Features }}<li>{{ . }}</li>{{ end }}
+          </ul>
+          <p><a class="retro-cta" href="#contact">[ {{ .CTA }} ]</a></p>
+        </div>
+      {{ end }}
+    </div>
+
+    <h3>ADD-ONS</h3>
+    {{ range .Site.AddOns }}
+      <div class="panel panel-inline">
+        <p class="panel-title">{{ .Name }} <span class="price-inline">{{ .Price }}</span></p>
+        <p>{{ .Summary }}</p>
+      </div>
+    {{ end }}
+  </section>
+
+  <section id="testimonials" class="retro-section">
+    <h2><span class="hash">##</span> REVIEWS.NFO</h2>
+    {{ range .Site.Testimonials }}
+      <div class="panel quote">
+        <p>&quot;{{ .Quote }}&quot;</p>
+        <p class="quote-by">&mdash; {{ .Name }}{{ if .Company }}, {{ .Company }}{{ end }}</p>
+      </div>
+    {{ end }}
+  </section>
+
+  <section id="blogs" class="retro-section">
+    <h2><span class="hash">##</span> BLOGROLL</h2>
+    {{ range .Site.Posts }}
+      <div class="panel panel-inline">
+        <p class="panel-title"><span class="post-date">[{{ .Date }}]</span> {{ .Title }}</p>
+        <p>{{ .Summary }}</p>
+      </div>
+    {{ end }}
+    <p class="more-link">&gt;&gt; <a class="retro-link" href="/blogs">ALL POSTS</a></p>
+  </section>
+
+  <section class="retro-section">
+    <h2><span class="hash">##</span> BUTTON.WALL</h2>
+    <p class="muted">RIGHT-CLICK, SAVE AS, LINK BACK. NO PERMISSION NEEDED.</p>
+    <div class="button-wall" data-button-wall></div>
+  </section>
+
+  <section class="retro-section">
+    <h2><span class="hash">##</span> AWARDS.NFO</h2>
+    <div class="award-card">
+      <p class="award-stars" data-award-stars aria-hidden="true">*****</p>
+      <p class="award-name" data-random="awards">COOL SITE OF THE DAY</p>
+      <p class="muted">AWARDED BY NOBODY IN PARTICULAR</p>
+    </div>
+    <div class="sticker-row" data-sticker-row></div>
+    <h3>MY WEBRING NEIGHBOURS</h3>
+    <div class="panel webring">
+      {{ range .Site.Retro.Webring }}
+        <a class="retro-link" href="#">{{ . }}</a>
+      {{ end }}
+      <p class="muted">[ prev ] [ <a class="retro-link" href="#" data-random-link>random</a> ] [ next ]</p>
+    </div>
+  </section>
+
+  <section id="contact" class="retro-section">
+    <h2><span class="hash">##</span> CONTACT.ME</h2>
+
+    <div class="contact-flex">
+      <div class="contact-box">
+        <div class="panel-bar">[MAIL] CONTACT</div>
+        <p class="panel-title">Contact Me</p>
+        <p class="k">Email</p>
+        <p><a class="contact-value retro-link" href="mailto:{{ .Site.Person.Email }}">{{ .Site.Person.Email }}</a></p>
+        <button class="copy-btn" type="button" data-copy="{{ .Site.Person.Email }}">[ copy email ]</button>
+      </div>
+
+      <div class="contact-box">
+        <div class="panel-bar">[KEY] ENCRYPTION</div>
+        <p class="panel-title">PGP Key</p>
+        <p>Download my public PGP key for encrypted communication using email.</p>
+        <a class="retro-cta download" href="/pgp-key.asc" download>[ DOWNLOAD .ASC ]</a>
+        <p class="fingerprint">
+          FINGERPRINT:<br>
+          <!-- TODO: replace with your real fingerprint -->
+          XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
+        </p>
+        <button class="copy-btn" type="button" data-copy-fingerprint>[ copy fingerprint ]</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="retro-section">
+    <h2><span class="hash">##</span> GUESTBOOK</h2>
+    <div class="panel">
+      <p class="panel-title">SIGN MY GUESTBOOK</p>
+      <p class="muted">{{ .Site.Retro.Guestbook }}</p>
+      <p class="form-ghost">
+        <span>NAME:</span> <span class="input-ghost">____________</span><br>
+        <span>EMAIL:</span> <span class="input-ghost">____________</span><br>
+        <span>MESSAGE:</span><br>
+        <span class="input-ghost block"></span>
+      </p>
+      <p class="muted">[ SUBMIT ]</p>
+    </div>
+  </section>
+
+  <section class="retro-section">
+    <h2><span class="hash">##</span> DECOR.ZIP</h2>
+    <p class="muted">RANDOM ARTEFACTS FROM THE ARCHIVE. RELOAD FOR MORE.</p>
+    <div class="decor" data-decor></div>
+  </section>
+
+</main>
+
+{{ template "retro_footer" . }}
+
+</div>
+<script src="/static/js/retro.js"></script>
+</body>
+</html>
+{{ end }}

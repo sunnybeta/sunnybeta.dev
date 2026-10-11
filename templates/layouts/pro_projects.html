@@ -1,0 +1,46 @@
+{{ define "pro_projects" }}<!doctype html>
+<html lang="en">
+<head>
+{{ template "pro_head" . }}
+</head>
+<body>
+
+{{ template "pro_header" . }}
+
+<main>
+  <section class="hero wrap">
+    <span class="eyebrow">Projects</span>
+    <h1>Selected <span class="accent">work.</span></h1>
+    <p class="lead">Client projects and personal ones. Each shipped, measured and still running.</p>
+  </section>
+
+  <section class="section wrap">
+    <div class="grid three">
+      {{ range .Site.Projects }}
+        <article class="card project">
+          <div class="project-thumb" aria-hidden="true"></div>
+          <h3>{{ .Name }}</h3>
+          <p class="muted">{{ .Client }}</p>
+          <p>{{ .Summary }}</p>
+          <div class="tags">{{ range .Tags }}<span class="tag">{{ . }}</span>{{ end }}</div>
+          <div class="meta"><span>{{ .Kind }}</span><span>{{ .Year }}</span></div>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+
+  <section class="section wrap cta">
+    <h2>Something like this?</h2>
+    <p class="lead">Tell me what you are building and I will give you an honest answer.</p>
+    <div class="actions">
+      <a class="btn primary" href="/contact">Get in touch</a>
+      <a class="btn" href="/pricing">See pricing</a>
+    </div>
+  </section>
+</main>
+
+{{ template "pro_footer" . }}
+
+</body>
+</html>
+{{ end }}

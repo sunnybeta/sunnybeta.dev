@@ -1,0 +1,20 @@
+{{ define "pro_header" }}
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/pro">
+      <span class="logo-mark" aria-hidden="true"></span>
+      {{ .Site.Person.Name }}
+    </a>
+
+    <nav class="site-nav" aria-label="Main">
+      {{ range .Site.Nav }}
+        <a href="{{ .Path }}"{{ if eq .Path $.Active }} class="active" aria-current="page"{{ end }}>{{ .Label }}</a>
+      {{ end }}
+    </nav>
+
+    <div class="header-side">
+      <a class="mode-link" href="/">indie mode</a>
+    </div>
+  </div>
+</header>
+{{ end }}

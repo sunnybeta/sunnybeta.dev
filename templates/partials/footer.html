@@ -1,0 +1,12 @@
+{{ define "pro_footer" }}
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>&copy; {{ .Site.Year }} {{ .Site.Person.Name }} | Made in {{ .Site.Person.Location }}</span>
+    <span class="footer-built">
+      Built with <span class="heart" aria-label="love">&#9829;</span>
+      &mdash; look at some of my projects on
+      <a class="footer-link" href="{{ .Site.Person.GithubURL }}" target="_blank" rel="noopener">GitHub</a>
+    </span>
+  </div>
+</footer>
+{{ end }}

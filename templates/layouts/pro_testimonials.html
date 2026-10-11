@@ -1,0 +1,42 @@
+{{ define "pro_testimonials" }}<!doctype html>
+<html lang="en">
+<head>
+{{ template "pro_head" . }}
+</head>
+<body>
+
+{{ template "pro_header" . }}
+
+<main>
+  <section class="hero wrap">
+    <span class="eyebrow">Testimonials</span>
+    <h1>What clients <span class="accent">say.</span></h1>
+    <p class="lead">Placeholder copy &mdash; replace each quote in main.go with real feedback.</p>
+  </section>
+
+  <section class="section wrap">
+    <div class="quote-list">
+      {{ range .Site.Testimonials }}
+        <blockquote class="card quote">
+          <p>{{ .Quote }}</p>
+          <footer class="quote-by">
+            <strong>{{ .Name }}</strong>
+            {{ if .Role }}<span class="muted">{{ .Role }}{{ if .Company }}, {{ .Company }}{{ end }}</span>{{ end }}
+          </footer>
+        </blockquote>
+      {{ end }}
+    </div>
+  </section>
+
+  <section class="section wrap cta">
+    <h2>Want to be on this page?</h2>
+    <p class="lead">Start a project and I will ask for a testimonial when it is done.</p>
+    <div class="actions"><a class="btn primary" href="/contact">Get in touch</a></div>
+  </section>
+</main>
+
+{{ template "pro_footer" . }}
+
+</body>
+</html>
+{{ end }}

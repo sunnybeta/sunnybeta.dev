@@ -1,0 +1,84 @@
+{{ define "pro_pricing" }}<!doctype html>
+<html lang="en">
+<head>
+{{ template "pro_head" . }}
+</head>
+<body>
+
+{{ template "pro_header" . }}
+
+<main>
+  <section class="hero wrap">
+    <span class="eyebrow">Pricing</span>
+    <h1>Fixed scope, <span class="accent">fixed price.</span></h1>
+    <p class="lead">
+      Every engagement starts with a written proposal and a number. No hourly billing
+      surprises, and no scope creep you did not sign off on.
+    </p>
+  </section>
+
+  <section class="section wrap">
+    <div class="grid two">
+      {{ range .Site.Tiers }}
+        <article class="card price-card{{ if .Popular }} featured{{ end }}">
+          {{ if .Popular }}<span class="badge">Most requested</span>{{ end }}
+          <span class="stamp">{{ .Tag }}</span>
+          <h3>{{ .Name }}</h3>
+          <p>{{ .Summary }}</p>
+          <div class="price">{{ .Price }} <small>{{ .Period }}</small></div>
+          <ul class="features">
+            {{ range .Features }}<li>{{ . }}</li>{{ end }}
+          </ul>
+          <a class="btn{{ if .Popular }} primary{{ end }}" href="/contact">{{ .CTA }}</a>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head">
+      <h2>Additional services</h2>
+      <p class="lead">Need something outside the packages above?</p>
+    </div>
+    <div class="grid two">
+      {{ range .Site.AddOns }}
+        <article class="card addon">
+          <h3>{{ .Name }}</h3>
+          <p>{{ .Summary }}</p>
+          <span class="stamp">{{ .Price }}</span>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head">
+      <h2>How pricing works</h2>
+    </div>
+    <div class="grid two">
+      <article class="card">
+        <h3>Fixed price, agreed up front</h3>
+        <p>The price is agreed before any work starts, and it is final. If development takes longer than expected, you are not charged extra.</p>
+      </article>
+      <article class="card">
+        <h3>Deposit and contract</h3>
+        <p>A deposit is required before work begins, usually a third of the total. We sign a short service contract, then I invoice.</p>
+      </article>
+      <article class="card">
+        <h3>Progress you can see</h3>
+        <p>You get regular updates on what has been completed, with the chance to suggest changes early &mdash; before they get expensive.</p>
+      </article>
+      <article class="card">
+        <h3>Handover and source code</h3>
+        <p>After the final invoice you receive the source code and full documentation. Keep a local backup; do not rely on mine.</p>
+      </article>
+    </div>
+    <div class="actions"><a class="btn primary" href="/contact">Ask a question first</a></div>
+  </section>
+</main>
+
+{{ template "pro_footer" . }}
+
+</body>
+</html>
+{{ end }}
