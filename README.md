@@ -1,66 +1,62 @@
 # Sunny Béta — portfolio
 
-Two sites, one generator. Everything the pages render lives in `main.go` as
-variables — edit that file, not the templates.
+Two sites, one Rust server. The pages are rendered from Askama templates at
+request time — nothing is written to disk. Everything the pages render lives in
+`src/content.rs` as data — edit that file, not the templates.
 
 ## Routes
 
-Every page is generated into `public/`, which is the deploy root — upload that
-folder on its own. Retro is the default site at `/`; the professional site
-starts at `/pro`.
+Retro is the default site at `/`; the professional site starts at `/pro`.
 
-| Route | File | Page | Stylesheet |
-| --- | --- | --- | --- |
-| `/`, `/retro` | `public/index.html` | Indie-web single page (everything on one page) | `retro.css` |
-| `/pro` | `public/pro.html` | Professional home | `style.css` |
-| `/experience` | `public/experience.html` | Experience | `style.css` |
-| `/projects` | `public/projects.html` | Projects | `style.css` |
-| `/pricing` | `public/pricing.html` | Pricing | `style.css` |
-| `/testimonials` | `public/testimonials.html` | Testimonials | `style.css` |
-| `/blogs` | `public/blogs.html` | Blogs | `style.css` |
-| `/contact` | `public/contact.html` | Email + PGP key | `style.css` |
+| Route | Page | Stylesheet |
+| --- | --- | --- |
+| `/`, `/retro` | Indie-web single page (everything on one page) | `retro.css` |
+| `/pro` | Professional home | `style.css` |
+| `/experience` | Experience | `style.css` |
+| `/projects` | Projects | `style.css` |
+| `/pricing` | Pricing | `style.css` |
+| `/testimonials` | Testimonials | `style.css` |
+| `/blogs` | Blogs | `style.css` |
+| `/contact` | Email + PGP key | `style.css` |
 
 ## Commands
 
 ```sh
-make        # generate public/ (HTML + copied assets)
-make serve  # generate, then serve public/ on http://localhost:8080
-make clean  # delete public/
+make         # cargo build
+make serve   # cargo run — serve on http://localhost:8080
+make clean   # cargo clean
 ```
 
-## Build output
+Set `PORT` to listen somewhere other than 8080 (`PORT=3000 cargo run`).
 
-`public/` is entirely generated — never edit files inside it, `make clean`
-deletes the whole folder. `make` writes the HTML and copies in the files that
-belong at the web root but are hand-written:
+## Serving
 
-- `style.css` and `retro.css` stay at the repo root as the source of truth and
-  are copied into `public/` on every build, so keep editing them there.
-- `pgp-key.asc` and the whole `static/` folder (JS and favicon) are copied in
-  the same way.
+The crate is a library plus a small binary: `src/lib.rs` exposes the router and
+`src/main.rs` runs the server. Page handlers live in `src/routes.rs`, one
+Askama template per page. The hand-written files at the web root are served
+straight off the repo — they are never copied anywhere:
 
-The result is a self-contained folder: `public/index.html`, `public/pro.html`,
-`public/pricing.html`, `public/testimonials.html`, `public/blogs.html`,
-`public/projects.html`, `public/experience.html`, `public/contact.html`,
-`public/style.css`, `public/retro.css`, `public/static/` and
-`public/pgp-key.asc`. Links are extensionless (`/pricing`), so a host needs to
-serve `pricing.html` for `/pricing` — GitHub Pages and Netlify do this out of
-the box.
+- `style.css` and `retro.css` are served at `/style.css` and `/retro.css`.
+- `pgp-key.asc` is served at `/pgp-key.asc`.
+- the whole `static/` folder (JS and favicon) is served under `/static/`.
+
+Links are extensionless (`/pricing`); the router maps them to their handlers.
 
 ## Editing content
 
 - `person` — name, email, location, socials
 - `facts`, `services`, `skills` — home page blocks
-- `tiers`, `addOns` — pricing packages
+- `tiers`, `add_ons` — pricing packages
 - `projects`, `testimonials`, `posts`, `roles` — page content
 - `retro` — status lines, badges, webring, guestbook note, plus the random
   pools behind the navbar meta strip, word art, captions, awards and stickers:
-  `LastUpdated`, `Quest`, `BuiltWith`, `Fortune`, `WordArt`, `Captions`,
-  `Awards`, `Stickers`, `Ticker`.
+  `last_updated`, `quest`, `built_with`, `fortune`, `word_art`, `captions`,
+  `awards`, `stickers`, `ticker`.
 
-Templates live in `templates/` and are split into partials
-(`head`, `header`, `footer`, `retro_head`, `retro_header`, `retro_footer`,
-`retro_art`). Nothing is hardcoded in the HTML.
+The page types live in `src/templates.rs`; the markup is split across
+`templates/layouts/` and `templates/partials/` (`head`, `header`, `footer`,
+`retro_head`, `retro_header`, `retro_footer`, `retro_art`). Nothing is
+hardcoded in the HTML.
 
 The pools are serialised into `<div id="retro-data" hidden>` as `|`-separated
 `data-*` attributes, and `static/js/retro.js` picks from them in the browser.
@@ -92,5 +88,4 @@ under `prefers-reduced-motion`.
 - PGP fingerprint is a stub (`XXXX XXXX ...`) in `templates/layouts/retro.html`
   and `templates/layouts/pro_contact.html`.
 - Blog posts are list entries only — no article pages yet.
-- The guestbook form is deliberately non-functional (the site is static); its
-  caption says so.
+- The guestbook form is deliberately non-functional; its caption says so.

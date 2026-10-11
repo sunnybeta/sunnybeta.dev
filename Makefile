@@ -1,8 +1,10 @@
-all:
-	go run .
+all: build
+
+build:
+	cargo build
 
 serve:
-	go run . -serve
+	cargo run
 
 clean:
-	rm -rf public
+	cargo clean

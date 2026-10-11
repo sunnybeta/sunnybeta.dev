@@ -1,10 +1,10 @@
-{{ define "retro_head" }}
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{{ .Description }}">
-<meta name="author" content="{{ .Site.Person.Name }}">
+<meta name="description" content="{{ description }}">
+<meta name="author" content="{{ site.person.name }}">
 <meta name="color-scheme" content="dark">
-<title>{{ .Title }} — {{ .Site.Person.Name }} :: HOME PAGE</title>
+<title>{{ title }} — {{ site.person.name }} :: HOME PAGE</title>
 <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/retro.css">
-{{ end }}
+

@@ -1,11 +1,11 @@
-{{ define "pro_pricing" }}<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-{{ template "pro_head" . }}
+{% include "partials/head.html" %}
 </head>
 <body>
 
-{{ template "pro_header" . }}
+{% include "partials/header.html" %}
 
 <main>
   <section class="hero wrap">
@@ -19,19 +19,19 @@
 
   <section class="section wrap">
     <div class="grid two">
-      {{ range .Site.Tiers }}
-        <article class="card price-card{{ if .Popular }} featured{{ end }}">
-          {{ if .Popular }}<span class="badge">Most requested</span>{{ end }}
-          <span class="stamp">{{ .Tag }}</span>
-          <h3>{{ .Name }}</h3>
-          <p>{{ .Summary }}</p>
-          <div class="price">{{ .Price }} <small>{{ .Period }}</small></div>
+      {% for tier in site.tiers %}
+        <article class="card price-card{% if tier.popular %} featured{% endif %}">
+          {% if tier.popular %}<span class="badge">Most requested</span>{% endif %}
+          <span class="stamp">{{ tier.tag }}</span>
+          <h3>{{ tier.name }}</h3>
+          <p>{{ tier.summary }}</p>
+          <div class="price">{{ tier.price }} <small>{{ tier.period }}</small></div>
           <ul class="features">
-            {{ range .Features }}<li>{{ . }}</li>{{ end }}
+            {% for feature in tier.features %}<li>{{ feature }}</li>{% endfor %}
           </ul>
-          <a class="btn{{ if .Popular }} primary{{ end }}" href="/contact">{{ .CTA }}</a>
+          <a class="btn{% if tier.popular %} primary{% endif %}" href="/contact">{{ tier.cta }}</a>
         </article>
-      {{ end }}
+      {% endfor %}
     </div>
   </section>
 
@@ -41,13 +41,13 @@
       <p class="lead">Need something outside the packages above?</p>
     </div>
     <div class="grid two">
-      {{ range .Site.AddOns }}
+      {% for addon in site.add_ons %}
         <article class="card addon">
-          <h3>{{ .Name }}</h3>
-          <p>{{ .Summary }}</p>
-          <span class="stamp">{{ .Price }}</span>
+          <h3>{{ addon.name }}</h3>
+          <p>{{ addon.summary }}</p>
+          <span class="stamp">{{ addon.price }}</span>
         </article>
-      {{ end }}
+      {% endfor %}
     </div>
   </section>
 
@@ -77,8 +77,8 @@
   </section>
 </main>
 
-{{ template "pro_footer" . }}
+{% include "partials/footer.html" %}
 
 </body>
 </html>
-{{ end }}
+

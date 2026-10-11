@@ -1,17 +1,17 @@
-{{ define "pro_contact" }}<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-{{ template "pro_head" . }}
+{% include "partials/head.html" %}
 </head>
 <body>
 
-{{ template "pro_header" . }}
+{% include "partials/header.html" %}
 
 <main class="contact-page wrap">
 
   <div class="contact-grid">
 
-    <a class="contact-box" href="mailto:{{ .Site.Person.Email }}">
+    <a class="contact-box" href="mailto:{{ site.person.email }}">
       <span class="contact-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/>
@@ -20,7 +20,7 @@
       </span>
       <h1>Contact Me</h1>
       <span class="contact-sub">Email</span>
-      <span class="contact-value">{{ .Site.Person.Email }}</span>
+      <span class="contact-value">{{ site.person.email }}</span>
     </a>
 
     <div class="contact-box">
@@ -37,7 +37,7 @@
 
       <span class="fingerprint">
         Fingerprint:<br>
-        <!-- TODO: replace with your real fingerprint -->
+        {# TODO: replace with your real fingerprint #}
         XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
       </span>
     </div>
@@ -45,15 +45,15 @@
   </div>
 
   <div class="copy-bar">
-    <button class="btn" data-copy="{{ .Site.Person.Email }}">Copy email</button>
+    <button class="btn" data-copy="{{ site.person.email }}">Copy email</button>
     <span class="copy-state" role="status" aria-live="polite"></span>
   </div>
 
 </main>
 
-{{ template "pro_footer" . }}
+{% include "partials/footer.html" %}
 
 <script src="/static/js/copy.js"></script>
 </body>
 </html>
-{{ end }}
+

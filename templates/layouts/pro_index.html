@@ -1,27 +1,27 @@
-{{ define "pro_index" }}<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-{{ template "pro_head" . }}
+{% include "partials/head.html" %}
 </head>
 <body>
 
-{{ template "pro_header" . }}
+{% include "partials/header.html" %}
 
 <main>
   <section class="hero wrap">
-    <span class="eyebrow">{{ .Site.Person.Availability }}</span>
-    <h1>{{ .Site.Person.Name }}</h1>
-    <p class="lead">{{ .Site.Person.Headline }}</p>
-    <p class="muted">{{ .Site.Person.Role }} &middot; {{ .Site.Person.Location }}</p>
+    <span class="eyebrow">{{ site.person.availability }}</span>
+    <h1>{{ site.person.name }}</h1>
+    <p class="lead">{{ site.person.headline }}</p>
+    <p class="muted">{{ site.person.role }} &middot; {{ site.person.location }}</p>
     <div class="actions">
       <a class="btn primary" href="/contact">Start a project</a>
       <a class="btn" href="/projects">See the work</a>
     </div>
 
     <dl class="facts">
-      {{ range .Site.Facts }}
-        <div class="fact"><dd>{{ .Value }}</dd><dt>{{ .Label }}</dt></div>
-      {{ end }}
+      {% for fact in site.facts %}
+        <div class="fact"><dd>{{ fact.value }}</dd><dt>{{ fact.label }}</dt></div>
+      {% endfor %}
     </dl>
   </section>
 
@@ -31,12 +31,12 @@
       <p class="lead">One person from scoping to launch &mdash; no handoffs.</p>
     </div>
     <div class="grid three">
-      {{ range .Site.Services }}
+      {% for service in site.services %}
         <article class="card">
-          <h3>{{ .Title }}</h3>
-          <p>{{ .Body }}</p>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.body }}</p>
         </article>
-      {{ end }}
+      {% endfor %}
     </div>
   </section>
 
@@ -46,17 +46,17 @@
       <p class="lead">A few things I have shipped recently.</p>
     </div>
     <div class="grid three">
-      {{ range .Site.Projects }}
-        {{ if .Featured }}
+      {% for project in site.projects %}
+        {% if project.featured %}
           <article class="card project">
             <div class="project-thumb" aria-hidden="true"></div>
-            <h3>{{ .Name }}</h3>
-            <p>{{ .Summary }}</p>
-            <div class="tags">{{ range .Tags }}<span class="tag">{{ . }}</span>{{ end }}</div>
-            <div class="meta"><span>{{ .Kind }}</span><span>{{ .Year }}</span></div>
+            <h3>{{ project.name }}</h3>
+            <p>{{ project.summary }}</p>
+            <div class="tags">{% for tag in project.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+            <div class="meta"><span>{{ project.kind }}</span><span>{{ project.year }}</span></div>
           </article>
-        {{ end }}
-      {{ end }}
+        {% endif %}
+      {% endfor %}
     </div>
     <div class="actions"><a class="btn" href="/projects">All projects</a></div>
   </section>
@@ -66,14 +66,14 @@
       <h2>What clients say</h2>
     </div>
     <div class="grid three">
-      {{ range $i, $t := .Site.Testimonials }}
-        {{ if lt $i 3 }}
+      {% for testimonial in site.testimonials %}
+        {% if loop.index0 < 3 %}
           <blockquote class="card quote">
-            <p>{{ $t.Quote }}</p>
-            <footer class="quote-by">{{ $t.Name }}{{ if $t.Company }} &mdash; {{ $t.Company }}{{ end }}</footer>
+            <p>{{ testimonial.quote }}</p>
+            <footer class="quote-by">{{ testimonial.name }}{% if !testimonial.company.is_empty() %} &mdash; {{ testimonial.company }}{% endif %}</footer>
           </blockquote>
-        {{ end }}
-      {{ end }}
+        {% endif %}
+      {% endfor %}
     </div>
     <div class="actions"><a class="btn" href="/testimonials">More testimonials</a></div>
   </section>
@@ -83,15 +83,15 @@
       <h2>Latest writing</h2>
     </div>
     <div class="grid three">
-      {{ range $i, $p := .Site.Posts }}
-        {{ if lt $i 3 }}
+      {% for post in site.posts %}
+        {% if loop.index0 < 3 %}
           <article class="card">
-            <span class="stamp">{{ .Date }}</span>
-            <h3><a class="card-link" href="{{ .URL }}">{{ .Title }}</a></h3>
-            <p>{{ .Summary }}</p>
+            <span class="stamp">{{ post.date }}</span>
+            <h3><a class="card-link" href="{{ post.url }}">{{ post.title }}</a></h3>
+            <p>{{ post.summary }}</p>
           </article>
-        {{ end }}
-      {{ end }}
+        {% endif %}
+      {% endfor %}
     </div>
     <div class="actions"><a class="btn" href="/blogs">All posts</a></div>
   </section>
@@ -106,8 +106,8 @@
   </section>
 </main>
 
-{{ template "pro_footer" . }}
+{% include "partials/footer.html" %}
 
 </body>
 </html>
-{{ end }}
+

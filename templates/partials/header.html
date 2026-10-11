@@ -1,15 +1,15 @@
-{{ define "pro_header" }}
+
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="logo" href="/pro">
       <span class="logo-mark" aria-hidden="true"></span>
-      {{ .Site.Person.Name }}
+      {{ site.person.name }}
     </a>
 
     <nav class="site-nav" aria-label="Main">
-      {{ range .Site.Nav }}
-        <a href="{{ .Path }}"{{ if eq .Path $.Active }} class="active" aria-current="page"{{ end }}>{{ .Label }}</a>
-      {{ end }}
+      {% for nav in site.nav %}
+        <a href="{{ nav.path }}"{% if nav.path == active %} class="active" aria-current="page"{% endif %}>{{ nav.label }}</a>
+      {% endfor %}
     </nav>
 
     <div class="header-side">
@@ -17,4 +17,4 @@
     </div>
   </div>
 </header>
-{{ end }}
+

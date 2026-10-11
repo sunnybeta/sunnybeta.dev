@@ -1,35 +1,35 @@
-{{ define "pro_blogs" }}<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-{{ template "pro_head" . }}
+{% include "partials/head.html" %}
 </head>
 <body>
 
-{{ template "pro_header" . }}
+{% include "partials/header.html" %}
 
 <main>
   <section class="hero wrap">
     <span class="eyebrow">Blogs</span>
     <h1>Notes and <span class="accent">write-ups.</span></h1>
-    <p class="lead">Placeholder list &mdash; add your real posts in main.go. Full articles are not part of this build yet.</p>
+    <p class="lead">Placeholder list &mdash; add your real posts in src/content.rs. Full articles are not part of this build yet.</p>
   </section>
 
   <section class="section wrap">
     <div class="post-list">
-      {{ range .Site.Posts }}
+      {% for post in site.posts %}
         <article class="card post">
-          <span class="stamp">{{ .Date }}</span>
-          <h3><a class="card-link" href="{{ .URL }}">{{ .Title }}</a></h3>
-          <p>{{ .Summary }}</p>
-          <div class="tags">{{ range .Tags }}<span class="tag">{{ . }}</span>{{ end }}</div>
+          <span class="stamp">{{ post.date }}</span>
+          <h3><a class="card-link" href="{{ post.url }}">{{ post.title }}</a></h3>
+          <p>{{ post.summary }}</p>
+          <div class="tags">{% for tag in post.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
         </article>
-      {{ end }}
+      {% endfor %}
     </div>
   </section>
 </main>
 
-{{ template "pro_footer" . }}
+{% include "partials/footer.html" %}
 
 </body>
 </html>
-{{ end }}
+

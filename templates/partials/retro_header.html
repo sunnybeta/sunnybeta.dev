@@ -1,9 +1,9 @@
-{{ define "retro_header" }}
+
 <div class="scanlines" aria-hidden="true"></div>
 
 <div class="retro-topbar">
     <a class="pro-btn" href="/pro">Visit the professional site &rarr;</a>
-    <span class="retro-tag">~ {{ .Site.Person.Handle }} ~</span>
+    <span class="retro-tag">~ {{ site.person.handle }} ~</span>
     <span class="retro-counter" data-visitor-counter>
       VISITOR #<span data-visitor-id>0000000</span>
     </span>
@@ -11,32 +11,32 @@
 
   <div class="marquee" role="marquee">
     <div class="marquee-track">
-      {{ range .Site.Retro.Badges }}
-        <span class="marquee-item">{{ . }} &#9679;</span>
-      {{ end }}
-      {{ range .Site.Retro.Badges }}
-        <span class="marquee-item">{{ . }} &#9679;</span>
-      {{ end }}
+      {% for badge in site.retro.badges %}
+        <span class="marquee-item">{{ badge }} &#9679;</span>
+      {% endfor %}
+      {% for badge in site.retro.badges %}
+        <span class="marquee-item">{{ badge }} &#9679;</span>
+      {% endfor %}
     </div>
   </div>
 
   <div class="marquee marquee-reverse">
     <div class="marquee-track ticker">
-      {{ range .Site.Retro.Ticker }}
-        <span class="marquee-item">{{ . }} &#9656;</span>
-      {{ end }}
-      {{ range .Site.Retro.Ticker }}
-        <span class="marquee-item">{{ . }} &#9656;</span>
-      {{ end }}
+      {% for item in site.retro.ticker %}
+        <span class="marquee-item">{{ item }} &#9656;</span>
+      {% endfor %}
+      {% for item in site.retro.ticker %}
+        <span class="marquee-item">{{ item }} &#9656;</span>
+      {% endfor %}
     </div>
   </div>
 
   <div class="retro-masthead">
     <h1 class="retro-logo">
-      <span class="blink">_</span>{{ .Site.Person.Name }}<span class="blink">_</span>
+      <span class="blink">_</span>{{ site.person.name }}<span class="blink">_</span>
     </h1>
     <span class="art-star" aria-hidden="true"><svg class="art"><use href="#tile-sparkle"/></svg></span>
-    <p class="retro-subtitle">{{ .Site.Person.Role }} // {{ .Site.Person.Location }}</p>
+    <p class="retro-subtitle">{{ site.person.role }} // {{ site.person.location }}</p>
   </div>
 
   <div class="wordart-wrap">
@@ -44,9 +44,9 @@
   </div>
 
   <nav class="retro-nav" aria-label="Sections">
-    {{ range .Site.RetroNav }}
-      <a href="{{ .Path }}">{{ .Label }}</a>
-    {{ end }}
+    {% for link in site.retro_nav %}
+      <a href="{{ link.path }}">{{ link.label }}</a>
+    {% endfor %}
   </nav>
 
   <div class="retro-navmeta">
@@ -60,4 +60,4 @@
     </span>
     <button class="navmeta-btn" type="button" data-reroll-all>[ re-roll all ]</button>
   </div>
-{{ end }}
+

@@ -1,11 +1,11 @@
-{{ define "pro_projects" }}<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-{{ template "pro_head" . }}
+{% include "partials/head.html" %}
 </head>
 <body>
 
-{{ template "pro_header" . }}
+{% include "partials/header.html" %}
 
 <main>
   <section class="hero wrap">
@@ -16,16 +16,16 @@
 
   <section class="section wrap">
     <div class="grid three">
-      {{ range .Site.Projects }}
+      {% for project in site.projects %}
         <article class="card project">
           <div class="project-thumb" aria-hidden="true"></div>
-          <h3>{{ .Name }}</h3>
-          <p class="muted">{{ .Client }}</p>
-          <p>{{ .Summary }}</p>
-          <div class="tags">{{ range .Tags }}<span class="tag">{{ . }}</span>{{ end }}</div>
-          <div class="meta"><span>{{ .Kind }}</span><span>{{ .Year }}</span></div>
+          <h3>{{ project.name }}</h3>
+          <p class="muted">{{ project.client }}</p>
+          <p>{{ project.summary }}</p>
+          <div class="tags">{% for tag in project.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+          <div class="meta"><span>{{ project.kind }}</span><span>{{ project.year }}</span></div>
         </article>
-      {{ end }}
+      {% endfor %}
     </div>
   </section>
 
@@ -39,8 +39,8 @@
   </section>
 </main>
 
-{{ template "pro_footer" . }}
+{% include "partials/footer.html" %}
 
 </body>
 </html>
-{{ end }}
+

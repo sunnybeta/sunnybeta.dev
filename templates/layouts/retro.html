@@ -1,36 +1,36 @@
-{{ define "retro" }}<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-{{ template "retro_head" . }}
+{% include "partials/retro_head.html" %}
 </head>
 <body>
-{{ template "retro_sprite" . }}
+{% include "partials/retro_art.html" %}
 
 <div id="retro-data"
-     data-status="{{ join .Site.Retro.Status " | " }}"
-     data-listening="{{ join .Site.Retro.Listening " | " }}"
-     data-mood="{{ join .Site.Retro.Mood " | " }}"
-     data-lastupdated="{{ join .Site.Retro.LastUpdated " | " }}"
-     data-quest="{{ join .Site.Retro.Quest " | " }}"
-     data-builtwith="{{ join .Site.Retro.BuiltWith " | " }}"
-     data-fortune="{{ join .Site.Retro.Fortune " | " }}"
-     data-wordart="{{ join .Site.Retro.WordArt " | " }}"
-     data-captions="{{ join .Site.Retro.Captions " | " }}"
-     data-awards="{{ join .Site.Retro.Awards " | " }}"
-     data-stickers="{{ join .Site.Retro.Stickers " | " }}"
-     data-webring="{{ join .Site.Retro.Webring " | " }}"
+     data-status="{{ site.retro.status|join(" | ") }}"
+     data-listening="{{ site.retro.listening|join(" | ") }}"
+     data-mood="{{ site.retro.mood|join(" | ") }}"
+     data-lastupdated="{{ site.retro.last_updated|join(" | ") }}"
+     data-quest="{{ site.retro.quest|join(" | ") }}"
+     data-builtwith="{{ site.retro.built_with|join(" | ") }}"
+     data-fortune="{{ site.retro.fortune|join(" | ") }}"
+     data-wordart="{{ site.retro.word_art|join(" | ") }}"
+     data-captions="{{ site.retro.captions|join(" | ") }}"
+     data-awards="{{ site.retro.awards|join(" | ") }}"
+     data-stickers="{{ site.retro.stickers|join(" | ") }}"
+     data-webring="{{ site.retro.webring|join(" | ") }}"
      hidden></div>
 
 <div class="retro-frame">
 
-{{ template "retro_header" . }}
+{% include "partials/retro_header.html" %}
 
 <main class="retro-main">
 
   <section id="about" class="retro-section">
     <h2><span class="hash">##</span> ABOUT.ME</h2>
-    <p class="retro-lead">{{ .Site.Person.Headline }}</p>
-    <p>{{ .Site.Person.Intro }}</p>
+    <p class="retro-lead">{{ site.person.headline }}</p>
+    <p>{{ site.person.intro }}</p>
 
     <div class="about-split">
       <div class="about-portrait">
@@ -42,9 +42,9 @@
 
       <div class="about-facts">
         <div class="retro-facts">
-          {{ range .Site.Facts }}
-            <div class="fact"><span class="fact-value">{{ .Value }}</span><span class="fact-label">{{ .Label }}</span></div>
-          {{ end }}
+          {% for fact in site.facts %}
+            <div class="fact"><span class="fact-value">{{ fact.value }}</span><span class="fact-label">{{ fact.label }}</span></div>
+          {% endfor %}
         </div>
         <p class="muted">THIS PAGE IS BEST EXPERIENCED WITH THE VOLUME UP AND A CUP OF TEA.</p>
       </div>
@@ -52,18 +52,18 @@
 
     <h3>WHAT I WORK WITH</h3>
     <div class="retro-grid-2">
-      {{ range .Site.Services }}
+      {% for service in site.services %}
         <div class="panel">
-          <div class="panel-bar">[{{ .Icon }}] {{ .Tag }}</div>
-          <p class="panel-title">{{ .Title }}</p>
-          <p>{{ .Body }}</p>
+          <div class="panel-bar">[{{ service.icon }}] {{ service.tag }}</div>
+          <p class="panel-title">{{ service.title }}</p>
+          <p>{{ service.body }}</p>
         </div>
-      {{ end }}
+      {% endfor %}
     </div>
 
-    {{ range .Site.Skills }}
-      <p class="skill-line"><span class="k">{{ .Name }}:</span> {{ range $i, $s := .Items }}{{ if $i }}, {{ end }}{{ $s }}{{ end }}</p>
-    {{ end }}
+    {% for skill in site.skills %}
+      <p class="skill-line"><span class="k">{{ skill.name }}:</span> {% for s in skill.items %}{% if loop.index0 > 0 %}, {% endif %}{{ s }}{% endfor %}</p>
+    {% endfor %}
 
     <div class="divider" aria-hidden="true"><svg class="art"><use href="#tile-sparkle"/></svg><svg class="art"><use href="#tile-flame"/></svg><svg class="art"><use href="#tile-sparkle"/></svg></div>
   </section>
@@ -75,7 +75,7 @@
         <p><span class="k">STATUS:</span> <span data-status-line>loading...</span></p>
         <p><span class="k">LISTENING:</span> <span data-listening-line>&mdash;</span></p>
         <p><span class="k">MOOD:</span> <span data-mood-line>&mdash;</span></p>
-        <p><span class="k">BUILD:</span> {{ .Site.Retro.Build }}</p>
+        <p><span class="k">BUILD:</span> {{ site.retro.build }}</p>
       </div>
       <button class="widget-btn" type="button" data-refresh-status>[ re-roll ]</button>
     </div>
@@ -105,7 +105,7 @@
       <div class="widget-bar alt">MAILBOX</div>
       <div class="widget-body">
         <p><span class="k">EMAIL:</span>
-          <a class="retro-link" href="mailto:{{ .Site.Person.Email }}">{{ .Site.Person.Email }}</a>
+          <a class="retro-link" href="mailto:{{ site.person.email }}">{{ site.person.email }}</a>
         </p>
         <p><span class="k">PGP:</span> key available &mdash; <a class="retro-link" href="#contact">see below</a></p>
       </div>
@@ -125,28 +125,28 @@
 
   <section id="experience" class="retro-section">
     <h2><span class="hash">##</span> EXPERIENCE.LOG</h2>
-    {{ range $i, $r := .Site.Roles }}
+    {% for role in site.roles %}
       <div class="panel">
-        <div class="panel-bar">LOG[{{ $i }}] :: {{ $r.Period }}</div>
-        <p class="panel-title">{{ $r.Title }} @ {{ $r.Org }}</p>
-        <p>{{ $r.Summary }}</p>
-        <p class="tags">{{ range $r.Tags }}<span class="tag">{{ . }}</span>{{ end }}</p>
+        <div class="panel-bar">LOG[{{ loop.index0 }}] :: {{ role.period }}</div>
+        <p class="panel-title">{{ role.title }} @ {{ role.org }}</p>
+        <p>{{ role.summary }}</p>
+        <p class="tags">{% for tag in role.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</p>
       </div>
-    {{ end }}
+    {% endfor %}
   </section>
 
   <section id="projects" class="retro-section">
     <h2><span class="hash">##</span> PROJECTS.DIR</h2>
     <div class="retro-grid-2">
-      {{ range .Site.Projects }}
+      {% for project in site.projects %}
         <div class="panel">
-          <div class="panel-bar">{{ .Year }} :: {{ .Kind }}</div>
+          <div class="panel-bar">{{ project.year }} :: {{ project.kind }}</div>
           <div class="panel-thumb" aria-hidden="true"><svg class="art art-lg" data-panel-art><use href="#tile-crt"/></svg></div>
-          <p class="panel-title">{{ .Name }}</p>
-          <p>{{ .Summary }}</p>
-          <p class="tags">{{ range .Tags }}<span class="tag">{{ . }}</span>{{ end }}</p>
+          <p class="panel-title">{{ project.name }}</p>
+          <p>{{ project.summary }}</p>
+          <p class="tags">{% for tag in project.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</p>
         </div>
-      {{ end }}
+      {% endfor %}
     </div>
     <p class="more-link">&gt;&gt; <a class="retro-link" href="/projects">MORE PROJECTS</a></p>
   </section>
@@ -156,48 +156,48 @@
     <p class="retro-lead">FIXED PRICE. AGREED BEFORE WORK STARTS. NO SURPRISES.</p>
 
     <div class="retro-grid-2">
-      {{ range .Site.Tiers }}
-        <div class="panel{{ if .Popular }} panel-hot{{ end }}">
-          {{ if .Popular }}<div class="hot-flag">POPULAR</div>{{ end }}
-          <div class="panel-bar">{{ .Tag }}</div>
-          <p class="panel-title">{{ .Name }}</p>
-          <p class="price-big">{{ .Price }}<span class="price-period"> {{ .Period }}</span></p>
-          <p>{{ .Summary }}</p>
+      {% for tier in site.tiers %}
+        <div class="panel{% if tier.popular %} panel-hot{% endif %}">
+          {% if tier.popular %}<div class="hot-flag">POPULAR</div>{% endif %}
+          <div class="panel-bar">{{ tier.tag }}</div>
+          <p class="panel-title">{{ tier.name }}</p>
+          <p class="price-big">{{ tier.price }}<span class="price-period"> {{ tier.period }}</span></p>
+          <p>{{ tier.summary }}</p>
           <ul class="retro-list">
-            {{ range .Features }}<li>{{ . }}</li>{{ end }}
+            {% for feature in tier.features %}<li>{{ feature }}</li>{% endfor %}
           </ul>
-          <p><a class="retro-cta" href="#contact">[ {{ .CTA }} ]</a></p>
+          <p><a class="retro-cta" href="#contact">[ {{ tier.cta }} ]</a></p>
         </div>
-      {{ end }}
+      {% endfor %}
     </div>
 
     <h3>ADD-ONS</h3>
-    {{ range .Site.AddOns }}
+    {% for addon in site.add_ons %}
       <div class="panel panel-inline">
-        <p class="panel-title">{{ .Name }} <span class="price-inline">{{ .Price }}</span></p>
-        <p>{{ .Summary }}</p>
+        <p class="panel-title">{{ addon.name }} <span class="price-inline">{{ addon.price }}</span></p>
+        <p>{{ addon.summary }}</p>
       </div>
-    {{ end }}
+    {% endfor %}
   </section>
 
   <section id="testimonials" class="retro-section">
     <h2><span class="hash">##</span> REVIEWS.NFO</h2>
-    {{ range .Site.Testimonials }}
+    {% for testimonial in site.testimonials %}
       <div class="panel quote">
-        <p>&quot;{{ .Quote }}&quot;</p>
-        <p class="quote-by">&mdash; {{ .Name }}{{ if .Company }}, {{ .Company }}{{ end }}</p>
+        <p>&quot;{{ testimonial.quote }}&quot;</p>
+        <p class="quote-by">&mdash; {{ testimonial.name }}{% if !testimonial.company.is_empty() %}, {{ testimonial.company }}{% endif %}</p>
       </div>
-    {{ end }}
+    {% endfor %}
   </section>
 
   <section id="blogs" class="retro-section">
     <h2><span class="hash">##</span> BLOGROLL</h2>
-    {{ range .Site.Posts }}
+    {% for post in site.posts %}
       <div class="panel panel-inline">
-        <p class="panel-title"><span class="post-date">[{{ .Date }}]</span> {{ .Title }}</p>
-        <p>{{ .Summary }}</p>
+        <p class="panel-title"><span class="post-date">[{{ post.date }}]</span> {{ post.title }}</p>
+        <p>{{ post.summary }}</p>
       </div>
-    {{ end }}
+    {% endfor %}
     <p class="more-link">&gt;&gt; <a class="retro-link" href="/blogs">ALL POSTS</a></p>
   </section>
 
@@ -217,9 +217,9 @@
     <div class="sticker-row" data-sticker-row></div>
     <h3>MY WEBRING NEIGHBOURS</h3>
     <div class="panel webring">
-      {{ range .Site.Retro.Webring }}
-        <a class="retro-link" href="#">{{ . }}</a>
-      {{ end }}
+      {% for link in site.retro.webring %}
+        <a class="retro-link" href="#">{{ link }}</a>
+      {% endfor %}
       <p class="muted">[ prev ] [ <a class="retro-link" href="#" data-random-link>random</a> ] [ next ]</p>
     </div>
   </section>
@@ -232,8 +232,8 @@
         <div class="panel-bar">[MAIL] CONTACT</div>
         <p class="panel-title">Contact Me</p>
         <p class="k">Email</p>
-        <p><a class="contact-value retro-link" href="mailto:{{ .Site.Person.Email }}">{{ .Site.Person.Email }}</a></p>
-        <button class="copy-btn" type="button" data-copy="{{ .Site.Person.Email }}">[ copy email ]</button>
+        <p><a class="contact-value retro-link" href="mailto:{{ site.person.email }}">{{ site.person.email }}</a></p>
+        <button class="copy-btn" type="button" data-copy="{{ site.person.email }}">[ copy email ]</button>
       </div>
 
       <div class="contact-box">
@@ -243,7 +243,7 @@
         <a class="retro-cta download" href="/pgp-key.asc" download>[ DOWNLOAD .ASC ]</a>
         <p class="fingerprint">
           FINGERPRINT:<br>
-          <!-- TODO: replace with your real fingerprint -->
+          {# TODO: replace with your real fingerprint #}
           XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
         </p>
         <button class="copy-btn" type="button" data-copy-fingerprint>[ copy fingerprint ]</button>
@@ -255,7 +255,7 @@
     <h2><span class="hash">##</span> GUESTBOOK</h2>
     <div class="panel">
       <p class="panel-title">SIGN MY GUESTBOOK</p>
-      <p class="muted">{{ .Site.Retro.Guestbook }}</p>
+      <p class="muted">{{ site.retro.guestbook }}</p>
       <p class="form-ghost">
         <span>NAME:</span> <span class="input-ghost">____________</span><br>
         <span>EMAIL:</span> <span class="input-ghost">____________</span><br>
@@ -274,10 +274,10 @@
 
 </main>
 
-{{ template "retro_footer" . }}
+{% include "partials/retro_footer.html" %}
 
 </div>
 <script src="/static/js/retro.js"></script>
 </body>
 </html>
-{{ end }}
+

@@ -1,30 +1,30 @@
-{{ define "pro_testimonials" }}<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-{{ template "pro_head" . }}
+{% include "partials/head.html" %}
 </head>
 <body>
 
-{{ template "pro_header" . }}
+{% include "partials/header.html" %}
 
 <main>
   <section class="hero wrap">
     <span class="eyebrow">Testimonials</span>
     <h1>What clients <span class="accent">say.</span></h1>
-    <p class="lead">Placeholder copy &mdash; replace each quote in main.go with real feedback.</p>
+    <p class="lead">Placeholder copy &mdash; replace each quote in src/content.rs with real feedback.</p>
   </section>
 
   <section class="section wrap">
     <div class="quote-list">
-      {{ range .Site.Testimonials }}
+      {% for t in site.testimonials %}
         <blockquote class="card quote">
-          <p>{{ .Quote }}</p>
+          <p>{{ t.quote }}</p>
           <footer class="quote-by">
-            <strong>{{ .Name }}</strong>
-            {{ if .Role }}<span class="muted">{{ .Role }}{{ if .Company }}, {{ .Company }}{{ end }}</span>{{ end }}
+            <strong>{{ t.name }}</strong>
+            {% if !t.role.is_empty() %}<span class="muted">{{ t.role }}{% if !t.company.is_empty() %}, {{ t.company }}{% endif %}</span>{% endif %}
           </footer>
         </blockquote>
-      {{ end }}
+      {% endfor %}
     </div>
   </section>
 
@@ -35,8 +35,8 @@
   </section>
 </main>
 
-{{ template "pro_footer" . }}
+{% include "partials/footer.html" %}
 
 </body>
 </html>
-{{ end }}
+
