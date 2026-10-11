@@ -3,6 +3,8 @@
 //! and `static/js/`) are served straight off the repo root — nothing is
 //! copied anywhere.
 
+use std::path::{Path, PathBuf};
+
 use axum::{http::StatusCode, routing::get, Router};
 use tower_http::services::ServeDir;
 
@@ -11,6 +13,20 @@ use crate::templates::{
     HtmlTemplate, ProBlogsPage, ProContactPage, ProExperiencePage, ProIndexPage, ProPricingPage,
     ProProjectsPage, ProTestimonialsPage, RetroPage,
 };
+
+/// Locate the `static/` directory. Prefer one beside the working directory (a
+/// deployed bundle), otherwise fall back to the crate directory so the server
+/// works no matter where it is launched from. `STATIC_DIR` overrides both.
+fn static_dir() -> PathBuf {
+    if let Ok(dir) = std::env::var("STATIC_DIR") {
+        return PathBuf::from(dir);
+    }
+    let local = Path::new("static");
+    if local.is_dir() {
+        return local.to_path_buf();
+    }
+    Path::new(env!("CARGO_MANIFEST_DIR")).join("static")
+}
 
 /// Build the application router.
 pub fn router() -> Router {
@@ -24,7 +40,7 @@ pub fn router() -> Router {
         .route("/projects", get(pro_projects))
         .route("/experience", get(pro_experience))
         .route("/contact", get(pro_contact))
-        .nest_service("/static", ServeDir::new("static"))
+        .nest_service("/static", ServeDir::new(static_dir()))
         .fallback(not_found)
 }
 

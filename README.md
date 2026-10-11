@@ -42,7 +42,10 @@ are served straight off the repo — they are never copied anywhere:
 - `static/js/` — the browser scripts (`retro.js`, `copy.js`).
 
 The whole folder is mounted at `/static`, so those files are served at
-`/static/css/…`, `/static/img/…`, `/static/files/…` and `/static/js/…`.
+`/static/css/…`, `/static/img/…`, `/static/files/…` and `/static/js/…`. The
+server looks for `static/` beside the current working directory and falls back
+to the crate directory, so it can be launched from anywhere — set `STATIC_DIR`
+to point at the folder explicitly.
 
 Links are extensionless (`/pricing`); the router maps them to their handlers.
 
