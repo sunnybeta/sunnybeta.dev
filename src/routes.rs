@@ -1,10 +1,10 @@
 //! HTTP routes: every page is rendered from an Askama template at request
-//! time. Hand-written assets (`style.css`, `retro.css`, `pgp-key.asc` and the
-//! `static/` folder) are served straight off the repo root — nothing is
+//! time. Hand-written assets (`static/css/`, `static/img/`, `static/files/`
+//! and `static/js/`) are served straight off the repo root — nothing is
 //! copied anywhere.
 
 use axum::{http::StatusCode, routing::get, Router};
-use tower_http::services::{ServeDir, ServeFile};
+use tower_http::services::ServeDir;
 
 use crate::content::site;
 use crate::templates::{
@@ -24,9 +24,6 @@ pub fn router() -> Router {
         .route("/projects", get(pro_projects))
         .route("/experience", get(pro_experience))
         .route("/contact", get(pro_contact))
-        .route_service("/style.css", ServeFile::new("style.css"))
-        .route_service("/retro.css", ServeFile::new("retro.css"))
-        .route_service("/pgp-key.asc", ServeFile::new("pgp-key.asc"))
         .nest_service("/static", ServeDir::new("static"))
         .fallback(not_found)
 }

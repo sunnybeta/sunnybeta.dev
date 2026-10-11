@@ -10,35 +10,39 @@ Retro is the default site at `/`; the professional site starts at `/pro`.
 
 | Route | Page | Stylesheet |
 | --- | --- | --- |
-| `/`, `/retro` | Indie-web single page (everything on one page) | `retro.css` |
-| `/pro` | Professional home | `style.css` |
-| `/experience` | Experience | `style.css` |
-| `/projects` | Projects | `style.css` |
-| `/pricing` | Pricing | `style.css` |
-| `/testimonials` | Testimonials | `style.css` |
-| `/blogs` | Blogs | `style.css` |
-| `/contact` | Email + PGP key | `style.css` |
+| `/`, `/retro` | Indie-web single page (everything on one page) | `/static/css/retro.css` |
+| `/pro` | Professional home | `/static/css/style.css` |
+| `/experience` | Experience | `/static/css/style.css` |
+| `/projects` | Projects | `/static/css/style.css` |
+| `/pricing` | Pricing | `/static/css/style.css` |
+| `/testimonials` | Testimonials | `/static/css/style.css` |
+| `/blogs` | Blogs | `/static/css/style.css` |
+| `/contact` | Email + PGP key | `/static/css/style.css` |
 
 ## Commands
 
 ```sh
 make         # cargo build
-make serve   # cargo run — serve on http://localhost:8080
+make serve   # cargo run — serve on http://localhost:2382
 make clean   # cargo clean
 ```
 
-Set `PORT` to listen somewhere other than 8080 (`PORT=3000 cargo run`).
+Set `PORT` to listen somewhere other than 2382 (`PORT=3000 cargo run`).
 
 ## Serving
 
 The crate is a library plus a small binary: `src/lib.rs` exposes the router and
 `src/main.rs` runs the server. Page handlers live in `src/routes.rs`, one
-Askama template per page. The hand-written files at the web root are served
-straight off the repo — they are never copied anywhere:
+Askama template per page. The hand-written assets all live under `static/` and
+are served straight off the repo — they are never copied anywhere:
 
-- `style.css` and `retro.css` are served at `/style.css` and `/retro.css`.
-- `pgp-key.asc` is served at `/pgp-key.asc`.
-- the whole `static/` folder (JS and favicon) is served under `/static/`.
+- `static/css/style.css` and `static/css/retro.css` — the stylesheets.
+- `static/img/favicon.svg` — the favicon.
+- `static/files/pgp-key.asc` — the public PGP key.
+- `static/js/` — the browser scripts (`retro.js`, `copy.js`).
+
+The whole folder is mounted at `/static`, so those files are served at
+`/static/css/…`, `/static/img/…`, `/static/files/…` and `/static/js/…`.
 
 Links are extensionless (`/pricing`); the router maps them to their handlers.
 
