@@ -15,7 +15,7 @@ pub struct Person {
     pub handle: &'static str,
     /// sunnybeta.dev
     pub domain: &'static str,
-    /// email@sunnybeta.dev
+    /// sunnybeta@protonmail.com
     pub email: &'static str,
     /// Dubai, UAE
     pub location: &'static str,
@@ -134,6 +134,10 @@ pub struct RetroStatus {
     pub awards: Vec<&'static str>,
     pub stickers: Vec<&'static str>,
     pub ticker: Vec<&'static str>,
+
+    /* sidebar widgets */
+    pub now_playing: Vec<&'static str>,
+    pub guestbook_entries: Vec<&'static str>,
 }
 
 /// Site bundles everything handed to the templates.
@@ -170,7 +174,7 @@ static SITE: LazyLock<Site> = LazyLock::new(|| {
         first_name: "Sunny",
         handle: "sunnybeta",
         domain: "sunnybeta.dev",
-        email: "email@sunnybeta.dev",
+        email: "sunnybeta@protonmail.com",
         location: "Dubai, UAE",
         location_short: "Dubai",
         role: "AI Engineer & Freelancer",
@@ -260,8 +264,8 @@ static SITE: LazyLock<Site> = LazyLock::new(|| {
         Tier {
             name: "One-page Website",
             tag: "STARTER",
-            price: "65",
-            period: "EUR / project",
+            price: "75",
+            period: "USD / project",
             summary:
                 "A clean single page for a personal project, small business or a quick launch.",
             features: vec![
@@ -277,8 +281,8 @@ static SITE: LazyLock<Site> = LazyLock::new(|| {
         Tier {
             name: "Business Website",
             tag: "POPULAR",
-            price: "210",
-            period: "EUR / project",
+            price: "230",
+            period: "USD / project",
             summary:
                 "A multi-page site for businesses that need to present real services and proof.",
             features: vec![
@@ -294,8 +298,8 @@ static SITE: LazyLock<Site> = LazyLock::new(|| {
         Tier {
             name: "Professional Website",
             tag: "SCALE",
-            price: "1 100",
-            period: "EUR / project",
+            price: "1 200",
+            period: "USD / project",
             summary: "A complete site with its own CMS for companies and larger projects.",
             features: vec![
                 "Everything from Business",
@@ -310,8 +314,8 @@ static SITE: LazyLock<Site> = LazyLock::new(|| {
         Tier {
             name: "Web App",
             tag: "SYSTEMS",
-            price: "2 400",
-            period: "EUR / project",
+            price: "2 600",
+            period: "USD / project",
             summary: "A real product: authentication, database, admin panel and integrations.",
             features: vec![
                 "Login and role system",
@@ -326,8 +330,8 @@ static SITE: LazyLock<Site> = LazyLock::new(|| {
         Tier {
             name: "AI Build",
             tag: "NEW",
-            price: "1 450",
-            period: "EUR / project",
+            price: "1 600",
+            period: "USD / project",
             summary: "Retrieval, agents or LLM features added to a product you already have.",
             features: vec![
                 "Retrieval over your documents",
@@ -360,12 +364,12 @@ static SITE: LazyLock<Site> = LazyLock::new(|| {
     let add_ons = vec![
         AddOn {
             name: "Hosting and domain setup",
-            price: "from 65 EUR",
+            price: "from 75 USD",
             summary: "Domain registration and reliable hosting arranged for your site. Hosting and domain costs are not included.",
         },
         AddOn {
             name: "Website management training",
-            price: "from 40 EUR",
+            price: "from 45 USD",
             summary: "A walkthrough so you can edit your own content without breaking the layout.",
         },
         AddOn {
@@ -375,7 +379,7 @@ static SITE: LazyLock<Site> = LazyLock::new(|| {
         },
         AddOn {
             name: "Ongoing maintenance",
-            price: "40 EUR / month",
+            price: "45 USD / month",
             summary: "Regular checks, updates and hosting management.",
         },
     ];
@@ -653,6 +657,27 @@ static SITE: LazyLock<Site> = LazyLock::new(|| {
             "BROWSER SAFE",
             "THANKS FOR VISITING",
             "TELL YOUR FRIENDS",
+        ],
+
+        /* sidebar widgets */
+        now_playing: vec![
+            "coastal highway — neon nights",
+            "the modem handshake",
+            "midnight build queue",
+            "sunday morning, slowly",
+            "rain on a CRT monitor",
+            "the quiet one before deploy",
+            "dubai skyline, 3am",
+            "waking up the database",
+        ],
+        guestbook_entries: vec![
+            "FIRST!! nice page!!",
+            "found this via webring, hi",
+            "the dice widget made my day",
+            "signed from a very slow modem",
+            "best vibes on the information superhighway",
+            "add me to your webring?",
+            "still checking if the hit counter works",
         ],
     };
 

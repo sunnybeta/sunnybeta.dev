@@ -302,6 +302,44 @@
 		if (quest) quest.textContent = pick(pools.quest, "—");
 	}
 
+	/* ---------- side nav scroll spy ---------- */
+
+	function spySections() {
+		var links = document.querySelectorAll("[data-side-nav]");
+		if (!links.length || !("IntersectionObserver" in window)) return;
+
+		var byId = {};
+		for (var i = 0; i < links.length; i++) {
+			byId[links[i].getAttribute("href").slice(1)] = links[i];
+		}
+
+		function mark(id) {
+			for (var k in byId) byId[k].classList.remove("is-active");
+			if (byId[id]) byId[id].classList.add("is-active");
+		}
+
+		var observer = new IntersectionObserver(
+			function (entries) {
+				var best = null;
+				for (var i = 0; i < entries.length; i++) {
+					if (!entries[i].isIntersecting) continue;
+					if (!best || entries[i].intersectionRatio > best.intersectionRatio) {
+						best = entries[i];
+					}
+				}
+				if (best) mark(best.target.id);
+			},
+			{ rootMargin: "-15% 0px -70% 0px", threshold: [0, 0.25, 0.5] }
+		);
+
+		for (var key in byId) {
+			var section = document.getElementById(key);
+			if (section) observer.observe(section);
+		}
+
+		mark("about");
+	}
+
 	/* ---------- boot ---------- */
 
 	function rerollAll() {
@@ -321,6 +359,7 @@
 		loadCatalogue();
 		bumpVisitor();
 		rerollAll();
+		spySections();
 
 		var pools = pooled();
 
@@ -344,7 +383,7 @@
 		});
 
 		on("[data-reroll-image]", function (event) {
-			var scope = event.target.closest(".widget") || document;
+			var scope = event.target.closest(".rail-widget") || document;
 			fillCaptions(pools);
 			fillImages(scope);
 		});

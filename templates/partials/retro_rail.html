@@ -1,0 +1,68 @@
+<aside class="side-rail" aria-label="Widgets">
+
+  <div class="rail-widget">
+    <div class="widget-bar">VISITORS.SYS</div>
+    <div class="widget-body center">
+      <p class="visitor-label">YOU ARE VISITOR NUMBER</p>
+      <p class="odometer" data-visitor-counter>
+        <span data-visitor-id>0000000</span>
+      </p>
+      <p class="visitor-note">THIS COUNTER IS PURELY COSMETIC<br>IT IS ALSO LYING A LITTLE</p>
+    </div>
+  </div>
+
+  <div class="rail-widget">
+    <div class="widget-bar">STATUS.TXT</div>
+    <div class="widget-body">
+      <p><span class="k">STATUS:</span> <span data-status-line>loading...</span></p>
+      <p><span class="k">LISTENING:</span> <span data-listening-line>&mdash;</span></p>
+      <p><span class="k">MOOD:</span> <span data-mood-line>&mdash;</span></p>
+      <p><span class="k">BUILD:</span> {{ site.retro.build }}</p>
+    </div>
+    <button class="widget-btn" type="button" data-refresh-status>[ re-roll ]</button>
+  </div>
+
+  <div class="rail-widget">
+    <div class="widget-bar">DICE.CARD</div>
+    <div class="widget-body center">
+      <div class="dice-row">
+        <div class="dice" data-dice="d6" aria-label="six sided dice"><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
+        <div class="dice dice-d20" data-dice="d20" aria-label="twenty sided dice"><span class="d20-face"><b data-dice-value>20</b></span></div>
+      </div>
+      <p class="dice-result">YOU ROLLED <b data-dice-total>1</b></p>
+      <p class="dice-quest" data-random="quest">&mdash;</p>
+    </div>
+    <button class="widget-btn" type="button" data-roll-dice>[ roll again ]</button>
+  </div>
+
+  <div class="rail-widget">
+    <div class="widget-bar alt">NOW.PLAYING</div>
+    <div class="widget-body center">
+      <div class="random-img-slot small" data-random-image>
+        <svg class="art art-lg" data-random-art aria-hidden="true"><use href="#tile-disc"/></svg>
+      </div>
+      <p class="random-caption" data-random-caption>loading...</p>
+      <p class="rail-track" data-random="nowplaying">&mdash;</p>
+    </div>
+    <button class="widget-btn" type="button" data-reroll-image>[ next ]</button>
+  </div>
+
+  <div class="rail-widget">
+    <div class="widget-bar alt">MAILBOX</div>
+    <div class="widget-body">
+      <p><span class="k">EMAIL:</span>
+        <a class="retro-link" href="mailto:{{ site.person.email }}">{{ site.person.email }}</a>
+      </p>
+      <p><span class="k">PGP:</span> key available &mdash; <a class="retro-link" href="#contact">see below</a></p>
+    </div>
+  </div>
+
+  <div class="rail-widget">
+    <div class="widget-bar">GUESTBOOK.LOG</div>
+    <div class="widget-body">
+      <p class="rail-entry" data-random="guestbook">&mdash;</p>
+      <p class="visitor-note">DECORATIVE ENTRIES ONLY. NOTHING IS SENT ANYWHERE.</p>
+    </div>
+  </div>
+
+</aside>

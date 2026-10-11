@@ -19,11 +19,17 @@
      data-awards="{{ site.retro.awards|join(" | ") }}"
      data-stickers="{{ site.retro.stickers|join(" | ") }}"
      data-webring="{{ site.retro.webring|join(" | ") }}"
+     data-nowplaying="{{ site.retro.now_playing|join(" | ") }}"
+     data-guestbook="{{ site.retro.guestbook_entries|join(" | ") }}"
      hidden></div>
 
 <div class="retro-frame">
 
 {% include "partials/retro_header.html" %}
+
+<div class="retro-shell">
+
+{% include "partials/retro_sidenav.html" %}
 
 <main class="retro-main">
 
@@ -66,61 +72,6 @@
     {% endfor %}
 
     <div class="divider" aria-hidden="true"><svg class="art"><use href="#tile-sparkle"/></svg><svg class="art"><use href="#tile-flame"/></svg><svg class="art"><use href="#tile-sparkle"/></svg></div>
-  </section>
-
-  <section class="retro-widgets">
-    <div class="widget widget-status">
-      <div class="widget-bar">STATUS.TXT</div>
-      <div class="widget-body">
-        <p><span class="k">STATUS:</span> <span data-status-line>loading...</span></p>
-        <p><span class="k">LISTENING:</span> <span data-listening-line>&mdash;</span></p>
-        <p><span class="k">MOOD:</span> <span data-mood-line>&mdash;</span></p>
-        <p><span class="k">BUILD:</span> {{ site.retro.build }}</p>
-      </div>
-      <button class="widget-btn" type="button" data-refresh-status>[ re-roll ]</button>
-    </div>
-
-    <div class="widget widget-dice">
-      <div class="widget-bar">DICE.CARD</div>
-      <div class="widget-body center">
-        <div class="dice-row">
-          <div class="dice" data-dice="d6" aria-label="six sided dice"><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
-          <div class="dice dice-d20" data-dice="d20" aria-label="twenty sided dice"><span class="d20-face"><b data-dice-value>20</b></span></div>
-        </div>
-        <p class="dice-result">YOU ROLLED <b data-dice-total>1</b></p>
-        <p class="dice-quest" data-random="quest">&mdash;</p>
-      </div>
-      <button class="widget-btn" type="button" data-roll-dice>[ roll again ]</button>
-    </div>
-
-    <div class="widget widget-visitor">
-      <div class="widget-bar">VISITORS.SYS</div>
-      <div class="widget-body center">
-        <p class="visitor-label">YOU ARE VISITOR NUMBER</p>
-        <p class="odometer" data-visitor-counter>
-          <span data-visitor-id>0000000</span>
-        </p>
-        <p class="visitor-note">THIS COUNTER IS PURELY COSMETIC<br>IT IS ALSO LYING A LITTLE</p>
-      </div>
-      <div class="widget-bar alt">MAILBOX</div>
-      <div class="widget-body">
-        <p><span class="k">EMAIL:</span>
-          <a class="retro-link" href="mailto:{{ site.person.email }}">{{ site.person.email }}</a>
-        </p>
-        <p><span class="k">PGP:</span> key available &mdash; <a class="retro-link" href="#contact">see below</a></p>
-      </div>
-    </div>
-
-    <div class="widget widget-now">
-      <div class="widget-bar">NOW.PLAYING</div>
-      <div class="widget-body center">
-        <div class="random-img-slot small" data-random-image>
-          <svg class="art art-lg" data-random-art aria-hidden="true"><use href="#tile-disc"/></svg>
-        </div>
-        <p class="random-caption" data-random-caption>loading...</p>
-      </div>
-      <button class="widget-btn" type="button" data-reroll-image>[ next ]</button>
-    </div>
   </section>
 
   <section id="experience" class="retro-section">
@@ -201,13 +152,13 @@
     <p class="more-link">&gt;&gt; <a class="retro-link" href="/blogs">ALL POSTS</a></p>
   </section>
 
-  <section class="retro-section">
+  <section id="buttonwall" class="retro-section">
     <h2><span class="hash">##</span> BUTTON.WALL</h2>
     <p class="muted">RIGHT-CLICK, SAVE AS, LINK BACK. NO PERMISSION NEEDED.</p>
     <div class="button-wall" data-button-wall></div>
   </section>
 
-  <section class="retro-section">
+  <section id="awards" class="retro-section">
     <h2><span class="hash">##</span> AWARDS.NFO</h2>
     <div class="award-card">
       <p class="award-stars" data-award-stars aria-hidden="true">*****</p>
@@ -251,7 +202,7 @@
     </div>
   </section>
 
-  <section class="retro-section">
+  <section id="guestbook" class="retro-section">
     <h2><span class="hash">##</span> GUESTBOOK</h2>
     <div class="panel">
       <p class="panel-title">SIGN MY GUESTBOOK</p>
@@ -266,13 +217,17 @@
     </div>
   </section>
 
-  <section class="retro-section">
+  <section id="decor" class="retro-section">
     <h2><span class="hash">##</span> DECOR.ZIP</h2>
     <p class="muted">RANDOM ARTEFACTS FROM THE ARCHIVE. RELOAD FOR MORE.</p>
     <div class="decor" data-decor></div>
   </section>
 
 </main>
+
+{% include "partials/retro_rail.html" %}
+
+</div>
 
 {% include "partials/retro_footer.html" %}
 

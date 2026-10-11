@@ -10,14 +10,21 @@
 	--ps2p: "Press Start 2P", "VT323", monospace;
 
 	--black: #000000;
+	--navy: #0a0a2a;
 	--ink: #00ffff;
+	--cyan: #00ffff;
 	--blue: #0000ff;
 	--blue-bright: #3333ff;
 	--violet: #7b5cff;
 	--indigo: #4f46ff;
 	--magenta: #ff00ff;
+	--pink: #ff69b4;
 	--lime: #00ff00;
 	--yellow: #ffff00;
+	--gold: #ffd700;
+	--orange: #ff7b1c;
+	--teal: #00d4aa;
+	--red: #ff2e4d;
 	--white: #ffffff;
 	--gray: #9a9a9a;
 }
@@ -111,11 +118,175 @@ h3 {
 /* ---------- Frame ---------- */
 
 .retro-frame {
-	max-width: 980px;
+	max-width: 1480px;
 	margin: 0 auto;
 	border: 3px solid var(--blue-bright);
 	padding: 10px;
 	background: var(--black);
+}
+
+/* ---------- Three column shell: side nav | main | widget rail ---------- */
+
+.retro-shell {
+	display: grid;
+	grid-template-columns: 190px minmax(0, 1fr) 250px;
+	gap: 20px;
+	align-items: start;
+	padding: 20px 0;
+}
+
+/* ---------- Left: section nav ---------- */
+
+.side-nav {
+	position: sticky;
+	top: 14px;
+	border: 3px solid var(--magenta);
+	background: var(--black);
+	padding: 8px;
+}
+
+.side-nav-bar {
+	font-family: var(--ps2p);
+	font-size: 9px;
+	color: var(--black);
+	background: var(--magenta);
+	padding: 6px 4px;
+	margin-bottom: 8px;
+	text-align: center;
+}
+
+.side-nav-bar.alt {
+	background: var(--lime);
+	margin: 12px 0 8px;
+}
+
+.side-nav-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: 5px;
+}
+
+.side-nav-list a {
+	display: block;
+	font-family: var(--ps2p);
+	font-size: 9px;
+	line-height: 1.5;
+	color: var(--cyan);
+	border: 2px solid var(--blue);
+	background: var(--navy);
+	padding: 7px 6px;
+	text-decoration: none;
+	transition: background 0.1s steps(1), color 0.1s steps(1);
+}
+
+.side-nav-list a:hover,
+.side-nav-list a:focus-visible {
+	background: var(--cyan);
+	color: var(--black);
+	border-color: var(--cyan);
+}
+
+.side-nav-list a.is-active {
+	background: var(--orange);
+	border-color: var(--yellow);
+	color: var(--black);
+}
+
+.side-nav-note {
+	font-size: 17px;
+	color: var(--lime);
+	margin: 0 0 8px;
+	word-break: break-word;
+}
+
+.side-nav-note.dim {
+	color: var(--gray);
+	font-size: 15px;
+}
+
+/* ---------- Right: widget rail ---------- */
+
+.side-rail {
+	position: sticky;
+	top: 14px;
+	display: grid;
+	gap: 14px;
+}
+
+.rail-widget {
+	border: 3px solid var(--blue-bright);
+	background: var(--black);
+}
+
+.rail-widget .widget-bar {
+	font-family: var(--ps2p);
+	font-size: 9px;
+	background: var(--indigo);
+	color: var(--white);
+	padding: 6px 4px;
+	border-bottom: 3px solid var(--blue-bright);
+	text-align: center;
+}
+
+.rail-widget .widget-bar.alt {
+	background: var(--teal);
+	color: var(--black);
+	border-bottom: none;
+	border-top: 3px solid var(--blue-bright);
+}
+
+.rail-widget .widget-body {
+	padding: 10px;
+}
+
+.rail-track {
+	color: var(--gold);
+	margin: 6px 0 0;
+}
+
+.rail-entry {
+	color: var(--red);
+	margin: 0 0 6px;
+}
+
+/* ---------- Colorful section accents ---------- */
+
+.retro-main > .retro-section:nth-of-type(3n+1) {
+	border-color: var(--magenta);
+}
+
+.retro-main > .retro-section:nth-of-type(3n+2) {
+	border-color: var(--teal);
+}
+
+.retro-main > .retro-section:nth-of-type(3n+3) {
+	border-color: var(--orange);
+}
+
+.retro-main > .retro-section:nth-of-type(3n+1) > h2 .hash {
+	color: var(--cyan);
+}
+
+.retro-main > .retro-section:nth-of-type(3n+2) > h2 .hash {
+	color: var(--yellow);
+}
+
+.retro-main > .retro-section:nth-of-type(3n+3) > h2 .hash {
+	color: var(--lime);
+}
+
+.retro-main > .retro-section:nth-of-type(3n+1) > h2 {
+	color: var(--pink);
+}
+
+.retro-main > .retro-section:nth-of-type(3n+2) > h2 {
+	color: var(--teal);
+}
+
+.retro-main > .retro-section:nth-of-type(3n+3) > h2 {
+	color: var(--orange);
 }
 
 .retro-topbar {
@@ -298,19 +469,7 @@ h3 {
 	font-size: 24px;
 }
 
-/* ---------- Widgets ---------- */
-
-.retro-widgets {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-	align-items: start;
-	gap: 18px;
-}
-
-.widget {
-	border: 3px solid var(--blue-bright);
-	background: var(--black);
-}
+/* ---------- Widgets (rendered inside the side rail) ---------- */
 
 .widget-bar {
 	font-family: var(--ps2p);
@@ -410,8 +569,8 @@ h3 {
 }
 
 .panel:hover {
-	border-color: var(--magenta);
-	box-shadow: 6px 6px 0 var(--indigo);
+	border-color: var(--orange);
+	box-shadow: 6px 6px 0 var(--violet);
 }
 
 .panel-bar {
@@ -447,7 +606,8 @@ h3 {
 }
 
 .panel-hot {
-	border-color: var(--magenta);
+	border-color: var(--gold);
+	box-shadow: 0 0 0 3px var(--magenta), 0 0 22px var(--gold);
 }
 
 .hot-flag {
@@ -457,7 +617,7 @@ h3 {
 	font-family: var(--ps2p);
 	font-size: 9px;
 	color: var(--black);
-	background: var(--magenta);
+	background: var(--gold);
 	padding: 6px;
 	animation: blink 1.2s steps(1) infinite;
 }
@@ -465,7 +625,7 @@ h3 {
 .price-big {
 	font-family: var(--ps2p);
 	font-size: 20px;
-	color: var(--lime);
+	color: var(--gold);
 	margin: 4px 0 10px;
 }
 
@@ -665,6 +825,23 @@ h3 {
 	background: var(--yellow);
 	border: 2px solid var(--white);
 	padding: 8px;
+}
+
+/* cycle the badge colours so the strip is not a wall of the same yellow */
+.badge-88:nth-child(4n+1) {
+	background: var(--teal);
+}
+
+.badge-88:nth-child(4n+2) {
+	background: var(--pink);
+}
+
+.badge-88:nth-child(4n+3) {
+	background: var(--orange);
+}
+
+.badge-88:nth-child(4n) {
+	background: var(--lime);
 }
 
 .retro-colophon {
@@ -997,7 +1174,7 @@ svg.art.spin,
 .dice-result {
 	font-family: var(--ps2p);
 	font-size: 10px;
-	color: var(--lime);
+	color: var(--red);
 	margin: 0 0 6px;
 }
 
@@ -1180,6 +1357,32 @@ svg.art.spin,
 
 	.pro-btn {
 		transition: none;
+	}
+}
+
+@media (max-width: 1100px) {
+	.retro-shell {
+		grid-template-columns: 170px minmax(0, 1fr);
+	}
+
+	.side-rail {
+		position: static;
+		grid-column: 1 / -1;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	}
+}
+
+@media (max-width: 820px) {
+	.retro-shell {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.side-nav {
+		position: static;
+	}
+
+	.side-nav-list {
+		grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 	}
 }
 

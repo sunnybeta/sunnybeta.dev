@@ -1,0 +1,15 @@
+<nav class="side-nav" aria-label="Sections">
+  <div class="side-nav-bar">SECTIONS</div>
+  <ul class="side-nav-list">
+    {% for link in site.retro_nav %}
+      <li><a href="{{ link.path }}" data-side-nav>{{ link.label }}</a></li>
+    {% endfor %}
+    <li><a href="#buttonwall" data-side-nav>Button Wall</a></li>
+    <li><a href="#awards" data-side-nav>Awards</a></li>
+    <li><a href="#guestbook" data-side-nav>Guestbook</a></li>
+    <li><a href="#decor" data-side-nav>Decor</a></li>
+  </ul>
+  <div class="side-nav-bar alt">SIGNAL</div>
+  <p class="side-nav-note" data-random="status">online</p>
+  <p class="side-nav-note dim">NAV v1.0 &mdash; hand-rolled, no JS</p>
+</nav>
