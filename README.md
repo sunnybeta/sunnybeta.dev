@@ -6,18 +6,19 @@ request time — nothing is written to disk. Everything the pages render lives i
 
 ## Routes
 
-Retro is the default site at `/`; the professional site starts at `/pro`.
+The professional site is the default at `/` and `/pro`; the indie-web site
+starts at `/retro`.
 
 | Route | Page | Stylesheet |
 | --- | --- | --- |
-| `/`, `/retro` | Indie-web single page (everything on one page) | `/static/css/retro.css` |
-| `/pro` | Professional home | `/static/css/style.css` |
+| `/`, `/pro` | Professional home | `/static/css/style.css` |
 | `/experience` | Experience | `/static/css/style.css` |
 | `/projects` | Projects | `/static/css/style.css` |
 | `/pricing` | Pricing | `/static/css/style.css` |
 | `/testimonials` | Testimonials | `/static/css/style.css` |
 | `/blogs` | Blogs | `/static/css/style.css` |
 | `/contact` | Email + PGP key | `/static/css/style.css` |
+| `/retro` | Indie-web single page (everything on one page) | `/static/css/retro.css` |
 
 ## Commands
 

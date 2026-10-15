@@ -687,7 +687,7 @@ static SITE: LazyLock<Site> = LazyLock::new(|| {
         nav: vec![
             NavItem {
                 label: "Home",
-                path: "/pro",
+                path: "/",
             },
             NavItem {
                 label: "Experience",

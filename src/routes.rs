@@ -31,9 +31,9 @@ fn static_dir() -> PathBuf {
 /// Build the application router.
 pub fn router() -> Router {
     Router::new()
-        .route("/", get(retro))
-        .route("/retro", get(retro))
+        .route("/", get(pro_index))
         .route("/pro", get(pro_index))
+        .route("/retro", get(retro))
         .route("/pricing", get(pro_pricing))
         .route("/testimonials", get(pro_testimonials))
         .route("/blogs", get(pro_blogs))
@@ -58,7 +58,7 @@ async fn pro_index() -> HtmlTemplate<ProIndexPage> {
         site: site(),
         title: "Home",
         description: "AI Engineer & Freelancer — Dubai, UAE",
-        active: "/pro",
+        active: "/",
     })
 }
 
