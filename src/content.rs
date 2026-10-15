@@ -416,7 +416,7 @@ static SITE: LazyLock<Site> = LazyLock::new(|| {
             quote: "We came in with a rough idea of using AI to automate [task, e.g., customer support / document processing], and Sunny turned it into a working solution. He explained the technical trade-offs in plain language, helped us pick the right approach for our budget, and built something that’s now saving our team hours every week. What stood out was their focus on accuracy and real-world testing, not just a flashy demo.",
             name: "Vinod",
             role: "Founder",
-            company: "Startup",
+            company: "Wellnesys",
         },
         Testimonial {
             quote: "Sunny handled everything, from database design and backend APIs to the frontend and deployment. Having one person own the entire stack made the project far smoother than our past experiences with multiple vendors. The code is clean and well documented, and when we needed new features after launch, they were easy to add. Reliable, proactive, and genuinely invested in the product’s success.",

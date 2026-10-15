@@ -4,14 +4,37 @@
 {% include "partials/head.html" %}
 </head>
 <body>
+{% include "partials/deco.html" %}
+
 
 {% include "partials/header.html" %}
 
 <main>
   <section class="hero wrap">
+    <div class="hero-art" aria-hidden="true">
+      <svg class="chat-art" viewBox="0 0 440 280">
+        <!-- big comic bubble with a tail pointing at the heading -->
+        <g class="ln">
+          <path class="fl" stroke-linejoin="round" d="M170 34 H400 A28 28 0 0 1 428 62 V190 A28 28 0 0 1 400 218 H268 L216 268 L228 218 H198 A28 28 0 0 1 170 190 Z"/>
+          <!-- ellipsis -->
+          <circle cx="238" cy="126" r="9"/>
+          <circle cx="284" cy="126" r="9"/>
+          <circle cx="330" cy="126" r="9"/>
+        </g>
+        <!-- small floating reply bubble -->
+        <g class="ln">
+          <path class="fl" stroke-linejoin="round" d="M36 60 H150 A20 20 0 0 1 170 80 V124 A20 20 0 0 1 150 144 H110 L84 168 L90 144 H56 A20 20 0 0 1 36 124 Z"/>
+        </g>
+        <!-- tiny filled badge bubble -->
+        <g>
+          <circle class="fl" cx="118" cy="52" r="16"/>
+          <path class="ln" stroke-width="3" stroke-linecap="round" d="M118 44 V56 M118 62 V63"/>
+        </g>
+      </svg>
+    </div>
     <span class="eyebrow">Testimonials</span>
     <h1>What clients <span class="accent">say.</span></h1>
-    <p class="lead">Placeholder copy &mdash; replace each quote in src/content.rs with real feedback.</p>
+    <p class="lead">Words from the people I have built things with.</p>
   </section>
 
   <section class="section wrap">

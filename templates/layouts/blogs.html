@@ -4,11 +4,30 @@
 {% include "partials/head.html" %}
 </head>
 <body>
+{% include "partials/deco.html" %}
+
 
 {% include "partials/header.html" %}
 
 <main>
   <section class="hero wrap">
+    <div class="hero-art" aria-hidden="true">
+      <svg class="pen-art" viewBox="0 0 280 280">
+        <g class="ln" transform="rotate(-38 140 140)" stroke-linejoin="round">
+          <!-- barrel -->
+          <rect class="fl" x="112" y="6" width="56" height="158" rx="28"/>
+          <!-- cap ring -->
+          <rect class="fl" x="108" y="158" width="64" height="20" rx="10"/>
+          <!-- nib -->
+          <path class="fl" d="M116 180 H164 C164 208 150 224 140 246 C130 224 116 208 116 180 Z"/>
+          <!-- slit + breather hole -->
+          <path d="M140 218 V200" stroke-width="4"/>
+          <circle class="fl" cx="140" cy="196" r="7"/>
+        </g>
+        <!-- ink flourish -->
+        <path class="ln" stroke-width="3.5" d="M30 236 C70 208 96 252 128 234 C150 222 166 238 184 230"/>
+      </svg>
+    </div>
     <span class="eyebrow">Blogs</span>
     <h1>Notes and <span class="accent">write-ups.</span></h1>
     <p class="lead">Long-form notes on engineering, AI and the tools of the trade.</p>

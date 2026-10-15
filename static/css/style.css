@@ -902,12 +902,20 @@ a.contact-box:hover {
 	text-align: center;
 }
 
+.hero-head .actions {
+	justify-content: center;
+}
+
+.hero-head .fact {
+	text-align: center;
+}
+
 .hero-name-row {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	gap: 10px 20px;
+	gap: 12px 16px;
 }
 
 .hero-name-row h1 {
@@ -916,14 +924,14 @@ a.contact-box:hover {
 
 .hero-social {
 	display: flex;
-	gap: 10px;
+	gap: 7px;
 }
 
 .hero-social a {
 	display: grid;
 	place-items: center;
-	width: 42px;
-	height: 42px;
+	width: 28px;
+	height: 28px;
 	border: 1px solid var(--line-strong);
 	border-radius: 999px;
 	background: var(--surface-2);
@@ -941,6 +949,129 @@ a.contact-box:hover {
 }
 
 .hero-social svg {
-	width: 18px;
-	height: 18px;
+	width: 13px;
+	height: 13px;
+	display: block;
+}
+
+/* ---------- Page-side decorations (squares & circles, peach) ---------- */
+
+.page-deco {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: -1;
+	overflow: hidden;
+	opacity: 0.55;
+}
+
+.deco {
+	position: absolute;
+	display: block;
+}
+
+.deco.sq {
+	border: 2px solid var(--peach-deep);
+	background: var(--peach-wash);
+}
+
+.deco.sq.solid {
+	background: var(--peach-deep);
+	border-color: transparent;
+	opacity: 0.6;
+}
+
+.deco.sq.rot-l {
+	transform: rotate(-14deg);
+}
+
+.deco.sq.rot-r {
+	transform: rotate(18deg);
+}
+
+.deco.ci {
+	border-radius: 50%;
+	border: 2px solid var(--peach);
+}
+
+.deco.ci.ring {
+	border: 2px dashed var(--peach);
+	opacity: 0.7;
+}
+
+.deco.ci.solid {
+	background: var(--peach-glow);
+	border-color: transparent;
+}
+
+/* left edge */
+.page-deco > :nth-child(1) { left: 26px;  top: 9%;  width: 18px; height: 18px; }
+.page-deco > :nth-child(2) { left: 58px;  top: 24%; width: 26px; height: 26px; }
+.page-deco > :nth-child(3) { left: 34px;  top: 45%; width: 12px; height: 12px; }
+.page-deco > :nth-child(4) { left: 44px;  top: 68%; width: 18px; height: 18px; }
+.page-deco > :nth-child(5) { left: 62px;  top: 88%; width: 22px; height: 22px; }
+
+/* right edge */
+.page-deco > :nth-child(6) { right: 30px; top: 13%; width: 14px; height: 14px; }
+.page-deco > :nth-child(7) { right: 52px; top: 36%; width: 20px; height: 20px; }
+.page-deco > :nth-child(8) { right: 40px; top: 58%; width: 28px; height: 28px; }
+.page-deco > :nth-child(9) { right: 64px; top: 82%; width: 14px; height: 14px; }
+
+@media (max-width: 1100px) {
+	.page-deco {
+		display: none;
+	}
+}
+
+/* ---------- Behind-the-title hero art (chat bubbles, pen) ---------- */
+
+.hero {
+	position: relative;
+}
+
+.hero-art {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: -1;
+}
+
+.hero-art svg {
+	position: absolute;
+	overflow: visible;
+}
+
+.hero-art .ln {
+	stroke: var(--peach);
+	stroke-width: 4;
+	stroke-linecap: round;
+	fill: none;
+}
+
+.hero-art .fl {
+	fill: var(--peach-wash);
+}
+
+.chat-art {
+	right: -36px;
+	top: -8px;
+	width: min(400px, 46vw);
+}
+
+.pen-art {
+	left: -22px;
+	top: -36px;
+	width: min(280px, 42vw);
+}
+
+@media (max-width: 720px) {
+	.chat-art {
+		right: 0;
+		width: 300px;
+	}
+
+	.pen-art {
+		left: 0;
+		width: 210px;
+	}
 }

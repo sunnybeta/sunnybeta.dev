@@ -4,14 +4,16 @@
 {% include "partials/head.html" %}
 </head>
 <body>
+{% include "partials/deco.html" %}
+
 
 {% include "partials/header.html" %}
 
 <main>
   <section class="hero wrap">
-    <span class="eyebrow">{{ site.person.availability }}</span>
-
     <div class="hero-head">
+      <span class="eyebrow">{{ site.person.availability }}</span>
+
       <div class="hero-name-row">
         <h1>{{ site.person.name }}</h1>
         <nav class="hero-social" aria-label="Social media">
@@ -36,18 +38,18 @@
       </div>
       <p class="lead">{{ site.person.headline }}</p>
       <p class="muted">{{ site.person.role }} &middot; <span aria-hidden="true">📍</span> {{ site.person.location }}</p>
-    </div>
 
-    <div class="actions">
-      <a class="btn primary" href="/contact">Start a project</a>
-      <a class="btn" href="/projects">See the work</a>
-    </div>
+      <div class="actions">
+        <a class="btn primary" href="/contact">Start a project</a>
+        <a class="btn" href="/projects">See the work</a>
+      </div>
 
-    <dl class="facts">
-      {% for fact in site.facts %}
-        <div class="fact"><dd>{{ fact.value }}</dd><dt>{{ fact.label }}</dt></div>
-      {% endfor %}
-    </dl>
+      <dl class="facts">
+        {% for fact in site.facts %}
+          <div class="fact"><dd>{{ fact.value }}</dd><dt>{{ fact.label }}</dt></div>
+        {% endfor %}
+      </dl>
+    </div>
   </section>
 
   <section class="section wrap">
