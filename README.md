@@ -6,17 +6,18 @@ request time — nothing is written to disk. Everything the pages render lives i
 
 ## Routes
 
-The professional site is the default at `/` and `/pro`; the indie-web site
+The professional site is the default at `/`; the indie-web site
 starts at `/retro`.
 
 | Route | Page | Stylesheet |
 | --- | --- | --- |
-| `/`, `/pro` | Professional home | `/static/css/style.css` |
+| `/` | Professional home | `/static/css/style.css` |
 | `/experience` | Experience | `/static/css/style.css` |
 | `/projects` | Projects | `/static/css/style.css` |
 | `/pricing` | Pricing | `/static/css/style.css` |
 | `/testimonials` | Testimonials | `/static/css/style.css` |
-| `/blogs` | Blogs | `/static/css/style.css` |
+| `/blogs` | Blogs list | `/static/css/style.css` |
+| `/blogs/&lt;slug&gt;` | Blog article | `/static/css/style.css` |
 | `/contact` | Email + PGP key | `/static/css/style.css` |
 | `/retro` | Indie-web single page (everything on one page) | `/static/css/retro.css` |
 
@@ -94,6 +95,9 @@ under `prefers-reduced-motion`.
 ## To do
 
 - PGP fingerprint is a stub (`XXXX XXXX ...`) in `templates/layouts/retro.html`
-  and `templates/layouts/pro_contact.html`.
-- Blog posts are list entries only — no article pages yet.
+  and `templates/layouts/contact.html`.
 - The guestbook form is deliberately non-functional; its caption says so.
+
+Blog content lives in `src/content.rs` (`posts`, one `Post` per article with
+`title`, `date`, `summary`, `url`, `tags` and `body` paragraphs); each post
+gets a page automatically at its `url` under `/blogs/<slug>`.

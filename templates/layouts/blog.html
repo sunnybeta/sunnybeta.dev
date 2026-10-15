@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% include "partials/head.html" %}
+</head>
+<body>
+
+{% include "partials/header.html" %}
+
+<main>
+  <article class="blog-article wrap">
+    <header class="blog-head">
+      <span class="stamp">{{ post.date }}</span>
+      <h1>{{ post.title }}</h1>
+      <div class="tags">{% for tag in post.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+    </header>
+
+    <div class="blog-body">
+      {% for para in post.body %}
+        <p>{{ para }}</p>
+      {% endfor %}
+    </div>
+
+    <footer class="blog-foot">
+      <a class="btn" href="/blogs">&larr; All posts</a>
+    </footer>
+  </article>
+</main>
+
+{% include "partials/footer.html" %}
+
+</body>
+</html>

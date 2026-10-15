@@ -10,9 +10,34 @@
 <main>
   <section class="hero wrap">
     <span class="eyebrow">{{ site.person.availability }}</span>
-    <h1>{{ site.person.name }}</h1>
-    <p class="lead">{{ site.person.headline }}</p>
-    <p class="muted">{{ site.person.role }} &middot; {{ site.person.location }}</p>
+
+    <div class="hero-head">
+      <div class="hero-name-row">
+        <h1>{{ site.person.name }}</h1>
+        <nav class="hero-social" aria-label="Social media">
+          <a href="{{ site.person.linkedin_url }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/>
+            </svg>
+          </a>
+          <a href="{{ site.person.x_url }}" target="_blank" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zM17.61 20.64h2.04L6.49 3.24H4.3l13.31 17.4z"/>
+            </svg>
+          </a>
+          <a href="{{ site.person.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        </nav>
+      </div>
+      <p class="lead">{{ site.person.headline }}</p>
+      <p class="muted">{{ site.person.role }} &middot; <span aria-hidden="true">📍</span> {{ site.person.location }}</p>
+    </div>
+
     <div class="actions">
       <a class="btn primary" href="/contact">Start a project</a>
       <a class="btn" href="/projects">See the work</a>

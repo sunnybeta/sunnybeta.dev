@@ -5,13 +5,19 @@
 
 use std::path::{Path, PathBuf};
 
-use axum::{http::StatusCode, routing::get, Router};
+use axum::{
+    extract::Path as AxumPath,
+    http::StatusCode,
+    response::{IntoResponse, Response},
+    routing::get,
+    Router,
+};
 use tower_http::services::ServeDir;
 
-use crate::content::site;
+use crate::content::{post_by_slug, site};
 use crate::templates::{
-    HtmlTemplate, ProBlogsPage, ProContactPage, ProExperiencePage, ProIndexPage, ProPricingPage,
-    ProProjectsPage, ProTestimonialsPage, RetroPage,
+    BlogPostPage, HtmlTemplate, ProBlogsPage, ProContactPage, ProExperiencePage, ProIndexPage,
+    ProPricingPage, ProProjectsPage, ProTestimonialsPage, RetroPage,
 };
 
 /// Locate the `static/` directory. Prefer one beside the working directory (a
@@ -31,15 +37,15 @@ fn static_dir() -> PathBuf {
 /// Build the application router.
 pub fn router() -> Router {
     Router::new()
-        .route("/", get(pro_index))
-        .route("/pro", get(pro_index))
+        .route("/", get(index))
         .route("/retro", get(retro))
-        .route("/pricing", get(pro_pricing))
-        .route("/testimonials", get(pro_testimonials))
-        .route("/blogs", get(pro_blogs))
-        .route("/projects", get(pro_projects))
-        .route("/experience", get(pro_experience))
-        .route("/contact", get(pro_contact))
+        .route("/pricing", get(pricing))
+        .route("/testimonials", get(testimonials))
+        .route("/blogs", get(blogs))
+        .route("/blogs/{slug}", get(blog_post))
+        .route("/projects", get(projects))
+        .route("/experience", get(experience))
+        .route("/contact", get(contact))
         .nest_service("/static", ServeDir::new(static_dir()))
         .fallback(not_found)
 }
@@ -53,7 +59,7 @@ async fn retro() -> HtmlTemplate<RetroPage> {
     })
 }
 
-async fn pro_index() -> HtmlTemplate<ProIndexPage> {
+async fn index() -> HtmlTemplate<ProIndexPage> {
     HtmlTemplate(ProIndexPage {
         site: site(),
         title: "Home",
@@ -62,7 +68,7 @@ async fn pro_index() -> HtmlTemplate<ProIndexPage> {
     })
 }
 
-async fn pro_pricing() -> HtmlTemplate<ProPricingPage> {
+async fn pricing() -> HtmlTemplate<ProPricingPage> {
     HtmlTemplate(ProPricingPage {
         site: site(),
         title: "Pricing",
@@ -71,7 +77,7 @@ async fn pro_pricing() -> HtmlTemplate<ProPricingPage> {
     })
 }
 
-async fn pro_testimonials() -> HtmlTemplate<ProTestimonialsPage> {
+async fn testimonials() -> HtmlTemplate<ProTestimonialsPage> {
     HtmlTemplate(ProTestimonialsPage {
         site: site(),
         title: "Testimonials",
@@ -80,7 +86,7 @@ async fn pro_testimonials() -> HtmlTemplate<ProTestimonialsPage> {
     })
 }
 
-async fn pro_blogs() -> HtmlTemplate<ProBlogsPage> {
+async fn blogs() -> HtmlTemplate<ProBlogsPage> {
     HtmlTemplate(ProBlogsPage {
         site: site(),
         title: "Blogs",
@@ -89,7 +95,22 @@ async fn pro_blogs() -> HtmlTemplate<ProBlogsPage> {
     })
 }
 
-async fn pro_projects() -> HtmlTemplate<ProProjectsPage> {
+/// One published article, looked up by the slug at the end of the URL.
+async fn blog_post(AxumPath(slug): AxumPath<String>) -> Response {
+    match post_by_slug(&slug) {
+        Some(post) => HtmlTemplate(BlogPostPage {
+            site: site(),
+            post,
+            title: post.title,
+            description: post.summary,
+            active: "/blogs",
+        })
+        .into_response(),
+        None => (StatusCode::NOT_FOUND, "not found").into_response(),
+    }
+}
+
+async fn projects() -> HtmlTemplate<ProProjectsPage> {
     HtmlTemplate(ProProjectsPage {
         site: site(),
         title: "Projects",
@@ -98,7 +119,7 @@ async fn pro_projects() -> HtmlTemplate<ProProjectsPage> {
     })
 }
 
-async fn pro_experience() -> HtmlTemplate<ProExperiencePage> {
+async fn experience() -> HtmlTemplate<ProExperiencePage> {
     HtmlTemplate(ProExperiencePage {
         site: site(),
         title: "Experience",
@@ -107,7 +128,7 @@ async fn pro_experience() -> HtmlTemplate<ProExperiencePage> {
     })
 }
 
-async fn pro_contact() -> HtmlTemplate<ProContactPage> {
+async fn contact() -> HtmlTemplate<ProContactPage> {
     HtmlTemplate(ProContactPage {
         site: site(),
         title: "Contact Me",

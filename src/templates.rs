@@ -28,13 +28,29 @@ macro_rules! page_template {
 }
 
 page_template!(RetroPage, "layouts/retro.html");
-page_template!(ProIndexPage, "layouts/pro_index.html");
-page_template!(ProPricingPage, "layouts/pro_pricing.html");
-page_template!(ProTestimonialsPage, "layouts/pro_testimonials.html");
-page_template!(ProBlogsPage, "layouts/pro_blogs.html");
-page_template!(ProProjectsPage, "layouts/pro_projects.html");
-page_template!(ProExperiencePage, "layouts/pro_experience.html");
-page_template!(ProContactPage, "layouts/pro_contact.html");
+page_template!(ProIndexPage, "layouts/index.html");
+page_template!(ProPricingPage, "layouts/pricing.html");
+page_template!(ProTestimonialsPage, "layouts/testimonials.html");
+page_template!(ProBlogsPage, "layouts/blogs.html");
+
+/// One published blog article — same base context plus the post itself.
+#[derive(Template)]
+#[template(path = "layouts/blog.html")]
+pub struct BlogPostPage {
+    /// Everything the templates render.
+    pub site: &'static Site,
+    /// The article being rendered.
+    pub post: &'static crate::content::Post,
+    /// `<title>` and og:title text.
+    pub title: &'static str,
+    /// Meta description.
+    pub description: &'static str,
+    /// Current nav path, for highlighting.
+    pub active: &'static str,
+}
+page_template!(ProProjectsPage, "layouts/projects.html");
+page_template!(ProExperiencePage, "layouts/experience.html");
+page_template!(ProContactPage, "layouts/contact.html");
 
 /// Wrapper that renders an Askama template into an Axum response.
 pub struct HtmlTemplate<T>(pub T);
