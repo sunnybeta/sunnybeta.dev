@@ -1,0 +1,7 @@
+target/
+.git/
+.gitignore
+
+# editor droppings
+*.log
+*.swp

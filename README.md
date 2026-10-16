@@ -24,12 +24,31 @@ starts at `/retro`.
 ## Commands
 
 ```sh
-make         # cargo build
-make serve   # cargo run — serve on http://localhost:2382
-make clean   # cargo clean
+make              # cargo build
+make serve        # cargo run — serve on http://localhost:2382
+make clean        # cargo clean
+make docker-build # build the container image (multi-stage)
+make docker-serve # run the image on port 2382
 ```
 
 Set `PORT` to listen somewhere other than 2382 (`PORT=3000 cargo run`).
+
+## Docker
+
+`Dockerfile` is a two-stage build. Stage one compiles the release binary
+against musl, so it is fully static; stage two drops that binary into a slim
+Alpine runtime next to the `static/` assets, owned by an unprivileged user.
+Askama templates are compiled into the binary, so `/app` needs nothing else —
+the image ends up around 11MB.
+
+```sh
+docker build -t sunnybeta .          # or: make docker-build
+docker run -p 2382:2382 sunnybeta    # or: make docker-serve
+```
+
+The container exposes 2382 by default and honours the same `PORT` env var, e.g.
+`docker run -e PORT=3000 -p 3000:3000 sunnybeta`. A health check probes
+`/retro` on `127.0.0.1:${PORT}` every 30 seconds.
 
 ## Serving
 
