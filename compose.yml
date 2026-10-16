@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    image: sunnybeta
+    ports:
+      - "2382:2382"
+    restart: unless-stopped
