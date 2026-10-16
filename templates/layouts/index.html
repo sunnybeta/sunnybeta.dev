@@ -1,140 +1,148 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-{% include "partials/head.html" %}
+	{% include "partials/head.html" %}
 </head>
+
 <body>
-{% include "partials/deco.html" %}
+	{% include "partials/deco.html" %}
 
 
-{% include "partials/header.html" %}
+	{% include "partials/header.html" %}
 
-<main>
-  <section class="hero wrap">
-    <div class="hero-head">
-      <span class="eyebrow">{{ site.person.availability }}</span>
+	<main class="center">
+		<section class="hero wrap">
+			<div class="hero-head">
+				<span class="eyebrow">{{ site.person.availability }}</span>
 
-      <div class="hero-name-row">
-        <h1>{{ site.person.name }}</h1>
-        <nav class="hero-social" aria-label="Social media">
-          <a href="{{ site.person.linkedin_url }}" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/>
-            </svg>
-          </a>
-          <a href="{{ site.person.x_url }}" target="_blank" rel="noopener" aria-label="X">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zM17.61 20.64h2.04L6.49 3.24H4.3l13.31 17.4z"/>
-            </svg>
-          </a>
-          <a href="{{ site.person.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="5"/>
-              <circle cx="12" cy="12" r="4"/>
-              <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/>
-            </svg>
-          </a>
-        </nav>
-      </div>
-      <p class="lead">{{ site.person.headline }}</p>
-      <p class="muted">{{ site.person.role }} &middot; <span aria-hidden="true">📍</span> {{ site.person.location }}</p>
+				<div class="hero-name-row">
+					<h1>{{ site.person.name }}</h1>
+					<nav class="hero-social" aria-label="Social media">
+						<a href="{{ site.person.linkedin_url }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+							<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path
+									d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
+							</svg>
+						</a>
+						<a href="{{ site.person.x_url }}" target="_blank" rel="noopener" aria-label="X">
+							<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path
+									d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zM17.61 20.64h2.04L6.49 3.24H4.3l13.31 17.4z" />
+							</svg>
+						</a>
+						<a href="{{ site.person.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+								aria-hidden="true">
+								<rect x="3" y="3" width="18" height="18" rx="5" />
+								<circle cx="12" cy="12" r="4" />
+								<circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none" />
+							</svg>
+						</a>
+					</nav>
+				</div>
+				<p class="lead">{{ site.person.headline }}</p>
+				<p class="muted">{{ site.person.role }} &middot; <span aria-hidden="true">📍</span> {{
+					site.person.location }}</p>
 
-      <div class="actions">
-        <a class="btn primary" href="/contact">Start a project</a>
-        <a class="btn" href="/projects">See the work</a>
-      </div>
+				<div class="actions">
+					<a class="btn primary" href="/pricing">Start a project</a>
+					<a class="btn" href="/projects">See the work</a>
+				</div>
 
-      <dl class="facts">
-        {% for fact in site.facts %}
-          <div class="fact"><dd>{{ fact.value }}</dd><dt>{{ fact.label }}</dt></div>
-        {% endfor %}
-      </dl>
-    </div>
-  </section>
+				<dl class="facts">
+					{% for fact in site.facts %}
+					<div class="fact">
+						<dd>{{ fact.value }}</dd>
+						<dt>{{ fact.label }}</dt>
+					</div>
+					{% endfor %}
+				</dl>
+			</div>
+		</section>
 
-  <section class="section wrap">
-    <div class="section-head">
-      <h2>What I do</h2>
-      <p class="lead">One person from scoping to launch &mdash; no handoffs.</p>
-    </div>
-    <div class="grid three">
-      {% for service in site.services %}
-        <article class="card">
-          <h3>{{ service.title }}</h3>
-          <p>{{ service.body }}</p>
-        </article>
-      {% endfor %}
-    </div>
-  </section>
+		<section class="section wrap">
+			<div class="section-head">
+				<h2>What I do</h2>
+				<p class="lead">One person from scoping to launch &mdash; no handoffs.</p>
+			</div>
+			<div class="grid three">
+				{% for service in site.services %}
+				<article class="card">
+					<h3>{{ service.title }}</h3>
+					<p>{{ service.body }}</p>
+				</article>
+				{% endfor %}
+			</div>
+		</section>
 
-  <section class="section wrap">
-    <div class="section-head">
-      <h2>Featured work</h2>
-      <p class="lead">A few things I have shipped recently.</p>
-    </div>
-    <div class="grid three">
-      {% for project in site.projects %}
-        {% if project.featured %}
-          <article class="card project">
-            <div class="project-thumb" aria-hidden="true"></div>
-            <h3>{{ project.name }}</h3>
-            <p>{{ project.summary }}</p>
-            <div class="tags">{% for tag in project.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
-            <div class="meta"><span>{{ project.kind }}</span><span>{{ project.year }}</span></div>
-          </article>
-        {% endif %}
-      {% endfor %}
-    </div>
-    <div class="actions"><a class="btn" href="/projects">All projects</a></div>
-  </section>
+		<section class="section wrap">
+			<div class="section-head">
+				<h2>Featured work</h2>
+				<p class="lead">A few things I have shipped recently.</p>
+			</div>
+			<div class="grid three">
+				{% for project in site.projects %}
+				{% if project.featured %}
+				<article class="card project">
+					<div class="project-thumb" aria-hidden="true"></div>
+					<h3>{{ project.name }}</h3>
+					<p>{{ project.summary }}</p>
+					<div class="tags">{% for tag in project.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+					<div class="meta"><span>{{ project.kind }}</span><span>{{ project.year }}</span></div>
+				</article>
+				{% endif %}
+				{% endfor %}
+			</div>
+			<div class="actions"><a class="btn" href="/projects">All projects</a></div>
+		</section>
 
-  <section class="section wrap">
-    <div class="section-head">
-      <h2>What clients say</h2>
-    </div>
-    <div class="grid three">
-      {% for testimonial in site.testimonials %}
-        {% if loop.index0 < 3 %}
-          <blockquote class="card quote">
-            <p>{{ testimonial.quote }}</p>
-            <footer class="quote-by">{{ testimonial.name }}{% if !testimonial.company.is_empty() %} &mdash; {{ testimonial.company }}{% endif %}</footer>
-          </blockquote>
-        {% endif %}
-      {% endfor %}
-    </div>
-    <div class="actions"><a class="btn" href="/testimonials">More testimonials</a></div>
-  </section>
+		<section class="section wrap">
+			<div class="section-head">
+				<h2>What clients say</h2>
+			</div>
+			<div class="grid three">
+				{% for testimonial in site.testimonials %}
+				{% if loop.index0 < 3 %} <blockquote class="card quote">
+					<p>{{ testimonial.quote }}</p>
+					<footer class="quote-by">{{ testimonial.name }}{% if !testimonial.company.is_empty() %} &mdash; {{
+						testimonial.company }}{% endif %}</footer>
+					</blockquote>
+					{% endif %}
+					{% endfor %}
+			</div>
+			<div class="actions"><a class="btn" href="/testimonials">More testimonials</a></div>
+		</section>
 
-  <section class="section wrap">
-    <div class="section-head">
-      <h2>Latest writing</h2>
-    </div>
-    <div class="grid three">
-      {% for post in site.posts %}
-        {% if loop.index0 < 3 %}
-          <article class="card">
-            <span class="stamp">{{ post.date }}</span>
-            <h3><a class="card-link" href="{{ post.url }}">{{ post.title }}</a></h3>
-            <p>{{ post.summary }}</p>
-          </article>
-        {% endif %}
-      {% endfor %}
-    </div>
-    <div class="actions"><a class="btn" href="/blogs">All posts</a></div>
-  </section>
+		<section class="section wrap">
+			<div class="section-head">
+				<h2>Latest writing</h2>
+			</div>
+			<div class="grid three">
+				{% for post in site.posts %}
+				{% if loop.index0 < 3 %} <article class="card">
+					<span class="stamp">{{ post.date }}</span>
+					<h3><a class="card-link" href="{{ post.url }}">{{ post.title }}</a></h3>
+					<p>{{ post.summary }}</p>
+					</article>
+					{% endif %}
+					{% endfor %}
+			</div>
+			<div class="actions"><a class="btn" href="/blogs">All posts</a></div>
+		</section>
 
-  <section class="section wrap cta">
-    <h2>Have a project in mind?</h2>
-    <p class="lead">Tell me what you are building and I will tell you honestly whether I am the right fit.</p>
-    <div class="actions">
-      <a class="btn primary" href="/contact">Get in touch</a>
-      <a class="btn" href="/pricing">See pricing</a>
-    </div>
-  </section>
-</main>
+		<section class="section wrap cta">
+			<h2>Have a project in mind?</h2>
+			<p class="lead">Tell me what you are building and I will tell you honestly whether I am the right fit.</p>
+			<div class="actions">
+				<a class="btn primary" href="/contact">Get in touch</a>
+				<a class="btn" href="/pricing">See pricing</a>
+			</div>
+		</section>
+	</main>
 
-{% include "partials/footer.html" %}
+	{% include "partials/footer.html" %}
 
 </body>
-</html>
 
+</html>

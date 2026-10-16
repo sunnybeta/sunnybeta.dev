@@ -1075,3 +1075,29 @@ a.contact-box:hover {
 		width: 210px;
 	}
 }
+
+/* ---------- Home (/): centre everything ---------- */
+
+main.center {
+	text-align: center;
+}
+
+/* max-width blocks need auto margins to truly centre */
+main.center .lead,
+main.center .section-head {
+	margin-inline: auto;
+}
+
+main.center .actions,
+main.center .tags {
+	justify-content: center;
+}
+
+main.center .meta {
+	justify-content: center;
+	gap: 14px;
+}
+
+main.center .facts {
+	margin-inline: auto;
+}
